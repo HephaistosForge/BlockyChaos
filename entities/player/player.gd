@@ -39,6 +39,7 @@ func _physics_process(_delta):
 				get_tree().create_tween().tween_property(self, "position", new_position, movement_delay) \
 					.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
 					
+				# Squish animation while moving
 				var animation_scale = Vector2(0.9, 0.9) + (direction * direction) * 0.4
 				var tween = get_tree().create_tween()
 				tween.tween_property(self, "scale", animation_scale, movement_delay / 3) \
@@ -52,6 +53,8 @@ func _physics_process(_delta):
 				var tween = get_tree().create_tween()
 				var angle = 0.2
 				var time = 0.1
+				
+				# Rotation animation when blocked by something
 				tween.tween_property($Body, "rotation", angle, time) \
 					.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 				tween.tween_property($Body, "rotation", -angle, time) \

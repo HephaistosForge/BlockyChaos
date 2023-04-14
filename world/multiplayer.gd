@@ -14,8 +14,15 @@ var connected_peer_ids = []
 var player_colors = [Color.RED, Color.BLUE, Color.YELLOW, Color.GREEN]
 var local_player_character # the Client
 
+func change_from_menu_to_game():
+	var parent = get_parent()
+	parent.get_node("Menu").visible = false
+	# parent.get_node("Waiting").visible = true
+	parent.get_node("Floor").visible = true
+
 
 func on_host() -> void:
+	change_from_menu_to_game()
 	multiplayer_peer.create_server(PORT)
 	multiplayer.multiplayer_peer = multiplayer_peer
 	
@@ -38,6 +45,7 @@ func on_host() -> void:
 
 
 func on_join() -> void:
+	change_from_menu_to_game()
 	multiplayer_peer.create_client(ADDRESS, PORT)
 	multiplayer.multiplayer_peer = multiplayer_peer
 
@@ -65,3 +73,7 @@ func add_newly_connected_player_character(new_peer_id) -> void:
 func add_previously_connected_players(peer_ids) -> void:
 	for peer_id in peer_ids:
 		add_new_player(peer_id)
+
+
+func _on_exit():
+	get_tree().quit()

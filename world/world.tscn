@@ -1,22 +1,62 @@
-[gd_scene load_steps=4 format=3 uid="uid://c48wvhcpnqhb1"]
+[gd_scene load_steps=7 format=3 uid="uid://c48wvhcpnqhb1"]
 
+[ext_resource type="Script" path="res://world/world.gd" id="1_nu8f6"]
 [ext_resource type="Script" path="res://world/floor.gd" id="1_qsj2w"]
 [ext_resource type="Script" path="res://world/multiplayer.gd" id="2_c2arv"]
+[ext_resource type="Texture2D" uid="uid://ciyu1yyim3ms4" path="res://world/Loading.png" id="3_bj73h"]
+[ext_resource type="Script" path="res://world/spinning.gd" id="4_pu5fr"]
 
 [sub_resource type="Environment" id="Environment_w6v8t"]
 background_mode = 3
 
 [node name="World" type="Node2D" groups=["world"]]
-script = ExtResource("1_qsj2w")
+script = ExtResource("1_nu8f6")
 
 [node name="Floor" type="Sprite2D" parent="."]
+visible = false
 centered = false
+script = ExtResource("1_qsj2w")
+
+[node name="Waiting" type="VBoxContainer" parent="."]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 500.0
+offset_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(500, 515)
+alignment = 1
+
+[node name="Waiting" type="Label" parent="Waiting"]
+layout_mode = 2
+text = "Waiting for other player"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Waiting"]
+layout_mode = 2
+alignment = 1
+
+[node name="LoadingIcon" type="TextureRect" parent="Waiting/HBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("3_bj73h")
+expand_mode = 1
+script = ExtResource("4_pu5fr")
 
 [node name="Menu" type="VBoxContainer" parent="."]
-offset_left = -494.0
-offset_top = -499.0
-offset_right = -95.0
-offset_bottom = -110.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="Host" type="Button" parent="Menu"]
 layout_mode = 2
@@ -26,6 +66,10 @@ text = "Host"
 layout_mode = 2
 text = "Join
 "
+
+[node name="Exit" type="Button" parent="Menu"]
+layout_mode = 2
+text = "Exit"
 
 [node name="Camera" type="Camera2D" parent="."]
 
@@ -37,3 +81,4 @@ environment = SubResource("Environment_w6v8t")
 
 [connection signal="button_up" from="Menu/Host" to="Multiplayer" method="on_host"]
 [connection signal="button_up" from="Menu/Join" to="Multiplayer" method="on_join"]
+[connection signal="button_up" from="Menu/Exit" to="Multiplayer" method="_on_exit"]
