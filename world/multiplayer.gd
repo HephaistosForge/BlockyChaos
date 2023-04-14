@@ -47,11 +47,10 @@ func add_new_player(peer_id) -> void:
 	var player_node = preload("res://entities/player/player.tscn").instantiate()
 	player_node.set_multiplayer_authority(peer_id)
 	var color = Color.RED if peer_id == 1 else Color.BLUE
-	var parent = get_parent()
-	var pos = parent.map_size / 2 * parent.box_size - Vector2.ONE * parent.box_size / 2
-	pos *= -1 if peer_id == 1 else 1
-	player_node.init_as_player(color, pos)
+	var pos = Vector2.ZERO if peer_id == 1 else Vector2.ONE * get_parent().map_size - Vector2.ONE
+	
 	self.add_child(player_node)
+	player_node.init_as_player(color, pos)
 	
 	if peer_id == multiplayer.get_unique_id():
 		local_player_character = player_node

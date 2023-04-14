@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bf1ov78ypuakn"
-path="res://.godot/imported/EyeBlack.png-cf18f3f0646950dcc7d85fcd7566761e.ctex"
+uid="uid://cg4vntieyrsut"
+path="res://.godot/imported/MrRed.png-66974db24e6e596ad4b2d0b98e7d7918.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/player/EyeBlack.png"
-dest_files=["res://.godot/imported/EyeBlack.png-cf18f3f0646950dcc7d85fcd7566761e.ctex"]
+source_file="res://entities/player/sprites/MrRed.png"
+dest_files=["res://.godot/imported/MrRed.png-66974db24e6e596ad4b2d0b98e7d7918.ctex"]
 
 [params]
 

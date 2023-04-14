@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dxqdmc3u7x6iw"]
+
+[ext_resource type="Texture2D" uid="uid://cr18jbgjf2df7" path="res://entities/trap/Sawblade.png" id="1_kvf45"]
+
+[node name="Trap" type="Node2D"]
+
+[node name="SawbladeSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_kvf45")

@@ -1,45 +1,63 @@
-[gd_scene load_steps=7 format=3 uid="uid://ckjvsrxj3lcsk"]
+[gd_scene load_steps=10 format=3 uid="uid://2qhapug04qh1"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_3yqfr"]
-[ext_resource type="Texture2D" uid="uid://ciqvshb2x1uxb" path="res://entities/player/Body.png" id="2_fuxu8"]
-[ext_resource type="Texture2D" uid="uid://vg24kd6ys30m" path="res://entities/player/Mouth.png" id="3_t8ovw"]
-[ext_resource type="Texture2D" uid="uid://cvdjv7p31nht8" path="res://entities/player/EyeWhite.png" id="4_1itw1"]
-[ext_resource type="Texture2D" uid="uid://bf1ov78ypuakn" path="res://entities/player/EyeBlack.png" id="5_hbb2x"]
+[ext_resource type="Texture2D" uid="uid://ciqvshb2x1uxb" path="res://entities/player/sprites/Body.png" id="2_rh600"]
+[ext_resource type="Texture2D" uid="uid://vg24kd6ys30m" path="res://entities/player/sprites/Mouth.png" id="3_0otid"]
+[ext_resource type="Texture2D" uid="uid://cvdjv7p31nht8" path="res://entities/player/sprites/EyeWhite.png" id="4_oidmn"]
+[ext_resource type="Texture2D" uid="uid://bf1ov78ypuakn" path="res://entities/player/sprites/EyeBlack.png" id="5_2gsgv"]
+[ext_resource type="AudioStream" uid="uid://bcjarlbt51d16" path="res://entities/player/audio/wrong.wav" id="6_yek66"]
+[ext_resource type="AudioStream" uid="uid://bcyu606so3hx7" path="res://entities/player/audio/move.wav" id="7_aqrrm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mqqhx"]
 size = Vector2(100, 100)
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7i3tb"]
+properties/0/path = NodePath(".:tile")
+properties/0/spawn = true
+properties/0/sync = true
+
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_3yqfr")
 
-[node name="BodySprite" type="Sprite2D" parent="."]
-self_modulate = Color(1, 0, 0, 1)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("2_fuxu8")
-
-[node name="MouthSprite" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("3_t8ovw")
-
-[node name="LeftEye" type="Sprite2D" parent="."]
-position = Vector2(-19, -12)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_1itw1")
-
-[node name="LeftEyePupil" type="Sprite2D" parent="LeftEye"]
-position = Vector2(12, 8)
-texture = ExtResource("5_hbb2x")
-
-[node name="LeftEye2" type="Sprite2D" parent="."]
-position = Vector2(19, -16)
-scale = Vector2(0.25, 0.25)
-texture = ExtResource("4_1itw1")
-
-[node name="LeftEyePupil" type="Sprite2D" parent="LeftEye2"]
-position = Vector2(-12, -8)
-texture = ExtResource("5_hbb2x")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_mqqhx")
+
+[node name="Body" type="Node2D" parent="."]
+
+[node name="BodySprite" type="Sprite2D" parent="Body"]
+self_modulate = Color(1, 0, 0, 1)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_rh600")
+
+[node name="MouthSprite" type="Sprite2D" parent="Body"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("3_0otid")
+
+[node name="LeftEye" type="Sprite2D" parent="Body"]
+position = Vector2(-19, -12)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_oidmn")
+
+[node name="LeftEyePupil" type="Sprite2D" parent="Body/LeftEye"]
+position = Vector2(12, 8)
+texture = ExtResource("5_2gsgv")
+
+[node name="LeftEye2" type="Sprite2D" parent="Body"]
+position = Vector2(19, -16)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_oidmn")
+
+[node name="LeftEyePupil" type="Sprite2D" parent="Body/LeftEye2"]
+position = Vector2(-12, -8)
+texture = ExtResource("5_2gsgv")
+
+[node name="AudioWrong" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_yek66")
+
+[node name="AudioMove" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_aqrrm")
+max_polyphony = 3
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_7i3tb")

@@ -6,7 +6,7 @@
 [sub_resource type="Environment" id="Environment_w6v8t"]
 background_mode = 3
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" groups=["world"]]
 script = ExtResource("1_qsj2w")
 
 [node name="Floor" type="Sprite2D" parent="."]
@@ -29,11 +29,11 @@ text = "Join
 
 [node name="Camera" type="Camera2D" parent="."]
 
-[node name="multiplayer" type="Node" parent="."]
+[node name="Multiplayer" type="Node" parent="."]
 script = ExtResource("2_c2arv")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_w6v8t")
 
-[connection signal="button_up" from="Menu/Host" to="multiplayer" method="on_host"]
-[connection signal="button_up" from="Menu/Join" to="multiplayer" method="on_join"]
+[connection signal="button_up" from="Menu/Host" to="Multiplayer" method="on_host"]
+[connection signal="button_up" from="Menu/Join" to="Multiplayer" method="on_join"]

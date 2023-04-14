@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cg4vntieyrsut"
-path="res://.godot/imported/MrRed.png-d27e1ddc99b4f5c604c4d32de1e79d39.ctex"
+uid="uid://ciqvshb2x1uxb"
+path="res://.godot/imported/Body.png-e6b2087de05d6bc71aa3d3d3c64dbe80.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/player/MrRed.png"
-dest_files=["res://.godot/imported/MrRed.png-d27e1ddc99b4f5c604c4d32de1e79d39.ctex"]
+source_file="res://entities/player/sprites/Body.png"
+dest_files=["res://.godot/imported/Body.png-e6b2087de05d6bc71aa3d3d3c64dbe80.ctex"]
 
 [params]
 

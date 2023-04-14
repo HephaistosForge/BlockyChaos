@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://vg24kd6ys30m"
-path="res://.godot/imported/Mouth.png-e8434a078c4d86d3de85a5b5167eac16.ctex"
+uid="uid://bf1ov78ypuakn"
+path="res://.godot/imported/EyeBlack.png-cc605717b8e690792cff683915188072.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://entities/player/Mouth.png"
-dest_files=["res://.godot/imported/Mouth.png-e8434a078c4d86d3de85a5b5167eac16.ctex"]
+source_file="res://entities/player/sprites/EyeBlack.png"
+dest_files=["res://.godot/imported/EyeBlack.png-cc605717b8e690792cff683915188072.ctex"]
 
 [params]
 
