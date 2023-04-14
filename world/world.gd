@@ -25,6 +25,7 @@ func add_random_traps(number: int):
 		add_trap(at_tile)
 	
 func start_game():
+	$Waiting.visible = false
 	add_random_traps(10)
 	for y in map_size.y:
 		for x in map_size.x:
@@ -64,3 +65,6 @@ func world_to_tile_coord(world_coord) -> Vector2:
 func random_tile() -> Vector2:
 	return Vector2(randi_range(0, map_size.x-1), randi_range(0, map_size.y-1))
 	
+
+func is_game_started():
+	return len($Multiplayer.connected_peer_ids) >= 1

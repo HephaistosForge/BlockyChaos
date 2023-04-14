@@ -18,7 +18,7 @@ func time():
 	return Time.get_unix_time_from_system()
 
 func _physics_process(_delta):
-	if is_multiplayer_authority():
+	if is_multiplayer_authority() and world.is_game_started():
 		
 		var direction = Input.get_vector("left", "right", "up", "down")
 		
