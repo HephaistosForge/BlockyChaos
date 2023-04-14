@@ -89,3 +89,12 @@ func remote_set_rotation(authority_rotation):
 @rpc("unreliable")
 func remote_set_scale(authority_scale):
 	global_scale = authority_scale
+
+func _input(event):
+	if event is InputEventMouseMotion and is_multiplayer_authority():
+		var lefteye = $Body/LeftEye.get_global_position()
+		var righteye = $Body/RightEye.get_global_position()
+		$Body/LeftEye/LeftEyePupil.set_global_position(lefteye + \
+			(event.position - Vector2(500, 500) - lefteye).normalized() * 4)
+		$Body/RightEye/RightEyePupil.set_global_position(righteye + \
+			(event.position - Vector2(500, 500) - righteye).normalized() * 4)
