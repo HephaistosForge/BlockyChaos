@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c48wvhcpnqhb1"]
+[gd_scene load_steps=8 format=3 uid="uid://c48wvhcpnqhb1"]
 
 [ext_resource type="Script" path="res://world/world.gd" id="1_nu8f6"]
 [ext_resource type="Script" path="res://world/floor.gd" id="1_qsj2w"]
@@ -8,6 +8,14 @@
 
 [sub_resource type="Environment" id="Environment_w6v8t"]
 background_mode = 3
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_oorh6"]
+properties/0/path = NodePath("Waiting:visible")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath("Menu:visible")
+properties/1/spawn = true
+properties/1/sync = true
 
 [node name="World" type="Node2D" groups=["world"]]
 script = ExtResource("1_nu8f6")
@@ -82,6 +90,9 @@ environment = SubResource("Environment_w6v8t")
 [node name="Spawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("res://world/tile/tile.tscn", "res://entities/trap/trap.tscn")
 spawn_path = NodePath("..")
+
+[node name="Synchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_oorh6")
 
 [connection signal="button_up" from="Menu/Host" to="Multiplayer" method="on_host"]
 [connection signal="button_up" from="Menu/Join" to="Multiplayer" method="on_join"]
