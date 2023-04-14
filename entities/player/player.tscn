@@ -17,6 +17,7 @@ properties/0/spawn = true
 properties/0/sync = true
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+z_index = 10
 script = ExtResource("1_3yqfr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -21,6 +21,6 @@ func _draw():
 	for y in map_size.y:
 		for x in map_size.x:
 			var at = get_parent().tile_to_world_coord(Vector2(x, y))
-			draw_string(font, at, "(%d, %d)" % [x, y])
+			# draw_string(font, at, "(%d, %d)" % [x, y])
 			
 			

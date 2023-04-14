@@ -27,6 +27,7 @@ func on_host() -> void:
 	multiplayer.multiplayer_peer = multiplayer_peer
 	
 	add_new_player(1)
+	get_parent().start_game()
 	
 	# multiplayer_peer.peer_connected.connect(
 	multiplayer.peer_connected.connect(

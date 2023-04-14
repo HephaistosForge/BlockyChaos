@@ -7,21 +7,31 @@ var line_color = Color(.1, .1, .1, 1)
 
 var traps = {}
 var trap_scene = preload("res://entities/trap/trap.tscn")
+var tile_scene = preload("res://world/tile/tile.tscn")
 
 func add_trap(at_tile: Vector2):
 	var trap = trap_scene.instantiate()
-	add_child(trap)
+	# trap = $Spawner.spawn(trap_scene)
+	add_child(trap, true)
 	var at_pos = tile_to_world_coord(at_tile)
 	trap.position = at_pos
+	print(trap.position)
 	trap.modulate = Color.RED
 	
 func add_random_traps(number: int):
 	for i in number:
 		var at_tile = random_tile()
+		print(at_tile)
 		add_trap(at_tile)
 	
 func start_game():
 	add_random_traps(10)
+	for y in map_size.y:
+		for x in map_size.x:
+			var tile = tile_scene.instantiate()
+			add_child(tile, true)
+			tile.position = tile_to_world_coord(Vector2(x, y))
+			
 
 
 # Coordinates
@@ -52,5 +62,5 @@ func world_to_tile_coord(world_coord) -> Vector2:
 
 
 func random_tile() -> Vector2:
-	return Vector2(randi_range(0, map_size.x), randi_range(0, map_size.y))
+	return Vector2(randi_range(0, map_size.x-1), randi_range(0, map_size.y-1))
 	

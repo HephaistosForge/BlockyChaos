@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://w58eodxwwimb"]
+
+[ext_resource type="Texture2D" uid="uid://c7kinghnn3vv2" path="res://world/tile/tile.png" id="1_afvr5"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_yw41m"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/sync = true
+properties/1/path = NodePath(".:rotation")
+properties/1/spawn = true
+properties/1/sync = true
+
+[node name="Tile" type="Node2D"]
+
+[node name="Sprite" type="Sprite2D" parent="."]
+z_index = -10
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_afvr5")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_yw41m")

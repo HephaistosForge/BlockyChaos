@@ -79,6 +79,10 @@ script = ExtResource("2_c2arv")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_w6v8t")
 
+[node name="Spawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://world/tile/tile.tscn", "res://entities/trap/trap.tscn")
+spawn_path = NodePath("..")
+
 [connection signal="button_up" from="Menu/Host" to="Multiplayer" method="on_host"]
 [connection signal="button_up" from="Menu/Join" to="Multiplayer" method="on_join"]
 [connection signal="button_up" from="Menu/Exit" to="Multiplayer" method="_on_exit"]

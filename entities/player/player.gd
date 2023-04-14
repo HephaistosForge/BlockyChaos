@@ -52,18 +52,17 @@ func _physics_process(_delta):
 				$AudioWrong.play()
 				var tween = get_tree().create_tween()
 				var angle = 0.2
-				var time = 0.1
+				var anim_time = 0.1
 				
 				# Rotation animation when blocked by something
-				tween.tween_property($Body, "rotation", angle, time) \
+				tween.tween_property(self, "rotation", angle, anim_time) \
 					.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
-				tween.tween_property($Body, "rotation", -angle, time) \
+				tween.tween_property(self, "rotation", -angle, anim_time) \
 					.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-				tween.tween_property($Body, "rotation", 0, time) \
+				tween.tween_property(self, "rotation", 0, anim_time) \
 					.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 		
 
-		
 
 		remote_set_position.rpc(global_position)
 		remote_set_scale.rpc(global_scale)
