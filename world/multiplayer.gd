@@ -57,9 +57,9 @@ func add_new_player(peer_id) -> void:
 	player_node.set_multiplayer_authority(peer_id)
 	var color = Color.RED if peer_id == 1 else Color.BLUE
 	var pos = Vector2.ZERO if peer_id == 1 else Vector2.ONE * get_parent().map_size - Vector2.ONE
-	
+	var type = "red" if peer_id == 1 else "blue"
 	self.add_child(player_node)
-	player_node.init_as_player(color, pos)
+	player_node.init_as_player(color, pos, type)
 	
 	if peer_id == multiplayer.get_unique_id():
 		local_player_character = player_node

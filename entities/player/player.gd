@@ -5,6 +5,7 @@ extends CharacterBody2D
 var movement_delay = 0.3
 var next_allowed_movement_time = -1
 var world
+var type: String
 @export var tile = Vector2.ZERO
 
 
@@ -18,7 +19,7 @@ func time():
 	return Time.get_unix_time_from_system()
 
 func _physics_process(_delta):
-	if is_multiplayer_authority() and world.is_game_started():
+	if is_multiplayer_authority() and world.is_game_running():
 		
 		var direction = Input.get_vector("left", "right", "up", "down")
 		
@@ -34,6 +35,7 @@ func _physics_process(_delta):
 			if can_move:
 				$AudioMove.play()
 				tile = new_tile
+				var is_dead = world.is_tile_deadly(tile)
 			
 				var new_position = world.tile_to_world_coord(tile)
 				get_tree().create_tween().tween_property(self, "position", new_position, movement_delay) \
@@ -46,6 +48,16 @@ func _physics_process(_delta):
 					.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 				tween.tween_property(self, "scale", Vector2.ONE, movement_delay / 3 * 2) \
 					.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+					
+				if is_dead:
+					$AudioWrong.play()
+					tween.tween_property(self, "scale", Vector2.ONE, .05) \
+						.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+					tween.parallel().tween_property(self, "rotation", 2 * PI, 1) \
+						.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BACK).from_current()
+					tween.parallel().tween_property(self, "scale", Vector2.ONE * .2, 1) \
+						.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BACK)
+					world.game_over()
 					
 				next_allowed_movement_time = time() + movement_delay
 			else:
@@ -69,9 +81,15 @@ func _physics_process(_delta):
 		remote_set_rotation.rpc(global_rotation)
 
 @rpc("unreliable")
-func init_as_player(color, tile_coord):
+func init_as_player(color, tile_coord, player_type: String):
 	$Body/BodySprite.self_modulate = color
 	
+	self.type = player_type
+	if is_multiplayer_authority():
+		Globals.local_player_type = type
+		#for trap in get_tree().get_nodes_in_group("trap"):
+			#if trap.type != type:
+				#trap.visible = false
 	tile = tile_coord
 	world = get_tree().get_first_node_in_group("world")
 	position = world.tile_to_world_coord(tile)
