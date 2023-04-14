@@ -17,7 +17,7 @@ var local_player_character # the Client
 func change_from_menu_to_game():
 	var parent = get_parent()
 	parent.get_node("Menu").visible = false
-	# parent.get_node("Waiting").visible = true
+	parent.get_node("Waiting").visible = true
 	parent.get_node("Floor").visible = true
 
 
