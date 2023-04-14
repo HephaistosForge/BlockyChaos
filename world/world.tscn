@@ -1,0 +1,39 @@
+[gd_scene load_steps=4 format=3 uid="uid://c48wvhcpnqhb1"]
+
+[ext_resource type="Script" path="res://world/floor.gd" id="1_qsj2w"]
+[ext_resource type="Script" path="res://world/multiplayer.gd" id="2_c2arv"]
+
+[sub_resource type="Environment" id="Environment_w6v8t"]
+background_mode = 3
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_qsj2w")
+
+[node name="Floor" type="Sprite2D" parent="."]
+centered = false
+
+[node name="Menu" type="VBoxContainer" parent="."]
+offset_left = -494.0
+offset_top = -499.0
+offset_right = -95.0
+offset_bottom = -110.0
+
+[node name="Host" type="Button" parent="Menu"]
+layout_mode = 2
+text = "Host"
+
+[node name="Join" type="Button" parent="Menu"]
+layout_mode = 2
+text = "Join
+"
+
+[node name="Camera" type="Camera2D" parent="."]
+
+[node name="multiplayer" type="Node" parent="."]
+script = ExtResource("2_c2arv")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_w6v8t")
+
+[connection signal="button_up" from="Menu/Host" to="multiplayer" method="on_host"]
+[connection signal="button_up" from="Menu/Join" to="multiplayer" method="on_join"]
