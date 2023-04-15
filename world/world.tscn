@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c48wvhcpnqhb1"]
+[gd_scene load_steps=15 format=3 uid="uid://c48wvhcpnqhb1"]
 
 [ext_resource type="Script" path="res://world/world.gd" id="1_nu8f6"]
 [ext_resource type="Script" path="res://world/floor.gd" id="1_qsj2w"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" path="res://world/gameover.gd" id="5_kpq7d"]
 [ext_resource type="AudioStream" uid="uid://dkphkpim1ixa5" path="res://world/music/background.mp3" id="6_ftcl4"]
 [ext_resource type="Script" path="res://world/restart.gd" id="7_v7vsj"]
+[ext_resource type="Theme" uid="uid://dp58tqgvn7o0e" path="res://world/default_theme.tres" id="8_djg35"]
+[ext_resource type="Texture2D" uid="uid://cg4vntieyrsut" path="res://entities/player/sprites/MrRed.png" id="11_jmlav"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bkkiv"]
 font_size = 99
@@ -98,22 +100,31 @@ script = ExtResource("7_v7vsj")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -100.0
+offset_right = 50.0
+offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme = ExtResource("8_djg35")
+theme_override_constants/separation = 25
 
 [node name="Host" type="Button" parent="Menu"]
 layout_mode = 2
+theme = ExtResource("8_djg35")
 text = "Host"
 
 [node name="Join" type="Button" parent="Menu"]
 layout_mode = 2
+theme = ExtResource("8_djg35")
 text = "Join
 "
 
 [node name="Exit" type="Button" parent="Menu"]
 layout_mode = 2
+theme = ExtResource("8_djg35")
 text = "Exit"
 
 [node name="Camera" type="Camera2D" parent="."]
@@ -133,6 +144,13 @@ replication_config = SubResource("SceneReplicationConfig_oorh6")
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_ftcl4")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = -472.0
+offset_top = -229.0
+offset_right = -72.0
+offset_bottom = 171.0
+texture = ExtResource("11_jmlav")
 
 [connection signal="button_down" from="BigFloatingMessageContainer/Restart" to="BigFloatingMessageContainer/Restart" method="_on_button_down"]
 [connection signal="button_up" from="Menu/Host" to="Multiplayer" method="on_host"]
