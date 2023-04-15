@@ -1,38 +1,37 @@
-[gd_scene load_steps=6 format=3 uid="uid://2qhapug04qh1"]
+[gd_scene load_steps=6 format=3 uid="uid://bmd3e8ptyq8vn"]
 
-[ext_resource type="Script" path="res://entities/menu_player/menu_player.gd" id="1_abag0"]
-[ext_resource type="Texture2D" uid="uid://ciqvshb2x1uxb" path="res://entities/player/sprites/Body.png" id="2_b6dwo"]
-[ext_resource type="Texture2D" uid="uid://vg24kd6ys30m" path="res://entities/player/sprites/Mouth.png" id="3_yb024"]
-[ext_resource type="Texture2D" uid="uid://cvdjv7p31nht8" path="res://entities/player/sprites/EyeWhite.png" id="4_kmeeq"]
-[ext_resource type="Texture2D" uid="uid://bf1ov78ypuakn" path="res://entities/player/sprites/EyeBlack.png" id="5_jdqh1"]
+[ext_resource type="Script" path="res://entities/menu_player/menu_player.gd" id="1_lmliv"]
+[ext_resource type="Texture2D" uid="uid://ciqvshb2x1uxb" path="res://entities/player/sprites/Body.png" id="2_nb6fw"]
+[ext_resource type="Texture2D" uid="uid://vg24kd6ys30m" path="res://entities/player/sprites/Mouth.png" id="3_yr3pj"]
+[ext_resource type="Texture2D" uid="uid://cvdjv7p31nht8" path="res://entities/player/sprites/EyeWhite.png" id="4_3n3vh"]
+[ext_resource type="Texture2D" uid="uid://bf1ov78ypuakn" path="res://entities/player/sprites/EyeBlack.png" id="5_xxgdf"]
 
-[node name="MenuPlayer" type="CharacterBody2D" groups=["player"]]
-collision_mask = 19
-script = ExtResource("1_abag0")
+[node name="MenuPlayer" type="Node2D" groups=["player"]]
+script = ExtResource("1_lmliv")
 
 [node name="Body" type="Node2D" parent="."]
 
 [node name="BodySprite" type="Sprite2D" parent="Body"]
 self_modulate = Color(1, 0, 0, 1)
 scale = Vector2(0.125, 0.125)
-texture = ExtResource("2_b6dwo")
+texture = ExtResource("2_nb6fw")
 
 [node name="MouthSprite" type="Sprite2D" parent="Body"]
 scale = Vector2(0.125, 0.125)
-texture = ExtResource("3_yb024")
+texture = ExtResource("3_yr3pj")
 
 [node name="LeftEye" type="Sprite2D" parent="Body"]
 position = Vector2(-38, -24)
 scale = Vector2(0.125, 0.125)
-texture = ExtResource("4_kmeeq")
+texture = ExtResource("4_3n3vh")
 
 [node name="LeftEyePupil" type="Sprite2D" parent="Body/LeftEye"]
-texture = ExtResource("5_jdqh1")
+texture = ExtResource("5_xxgdf")
 
 [node name="RightEye" type="Sprite2D" parent="Body"]
 position = Vector2(38, -32)
 scale = Vector2(0.125, 0.125)
-texture = ExtResource("4_kmeeq")
+texture = ExtResource("4_3n3vh")
 
 [node name="RightEyePupil" type="Sprite2D" parent="Body/RightEye"]
-texture = ExtResource("5_jdqh1")
+texture = ExtResource("5_xxgdf")
