@@ -8,8 +8,6 @@ var box_size = 100
 var line_width = 8
 var line_color = Color(.1, .1, .1, 1)
 
-#var is_game_over = false
-
 # Number starting at 1, at 2 bullets start. 
 # Each completed level increases difficulty by one
 # Number of bulletspawners is (difficulty - 1)
@@ -24,6 +22,7 @@ var goal_scene = preload("res://entities/goal/goal.tscn")
 
 var local_player
 
+
 func add_trap(at_tile: Vector2, type: String):
 	var trap = trap_scene.instantiate()
 	# trap = $Spawner.spawn(trap_scene)
@@ -34,7 +33,8 @@ func add_trap(at_tile: Vector2, type: String):
 	trap.modulate = Color.RED if type == "red" else Color.BLUE
 	# trap.visible = local_player == "red"
 	trap.type = type
-	
+
+
 func add_random_traps(number: int, type: String):
 	for i in number:
 		var at_tile
@@ -47,7 +47,8 @@ func add_random_traps(number: int, type: String):
 		trap_positions.append(at_tile)
 		if can_reach_other_player(trap_positions):
 			add_trap(at_tile, type)
-		
+
+
 func add_random_bullet_spawner(type: String):
 	var bullet_spawner = bullet_spawner_scene.instantiate()
 	# trap = $Spawner.spawn(trap_scene)
@@ -58,15 +59,8 @@ func add_random_bullet_spawner(type: String):
 	# trap.modulate = Color.RED if type == "red" else Color.BLUE
 	# trap.visible = local_player == "red"
 	bullet_spawner.type = type
-		
-@rpc("call_local")
-func sync_traps():
-	var local_type = $Multiplayer.local_player_character.type
-	for trap in get_tree().get_nodes_in_group("trap"):
-		trap.visible = local_type == trap.type
-		# print(trap.type, " | ", local_type, " -> ", trap.type == local_type)
-		# trap.visible = trap.type == type
-	
+
+
 func start_game():
 	$Waiting.visible = false
 	add_random_traps(10, "red")
@@ -97,10 +91,12 @@ func start_game():
 	# Call deferred is important here because otherwise godot does not have enough
 	# time to sync traps with the other player
 	call_deferred("rpc", "sync_traps")
-	
+
+
 func local_player_type():
 	return $Multiplayer.local_player_character.type
-			
+
+
 func is_tile_deadly(tile_coord):
 	return tile_coord in traps
 
@@ -112,31 +108,30 @@ func is_tile_occupied(tile) -> bool:
 			return true
 	return false
 
+
 func is_legal_tile_coord(tile_coord) -> bool:
 	return 0 <= tile_coord.x and tile_coord.x < map_size.x and 0 <= tile_coord.y and tile_coord.y < map_size.y
-	
+
+
 func clamp_tile_coord(tile) -> Vector2:
 	return round_vec2(Vector2(clamp(tile.x, 0, map_size.x-1), clamp(tile.y, 0, map_size.y-1)))
-	
+
+
 func round_vec2(vec) -> Vector2:
 	return Vector2(round(vec.x), round(vec.y))
 
+
 func tile_to_world_coord(tile_coord) -> Vector2:
 	return tile_coord * box_size + Vector2.ONE * box_size / 2 - map_size / 2 * box_size
-	
+
+
 func world_to_tile_coord(world_coord) -> Vector2:
 	var tile_coord = (world_coord + map_size / 2 * box_size - Vector2.ONE * box_size / 2) / box_size
 	return Vector2(round(tile_coord.x), round(tile_coord.y))
-	
 
 
 func random_tile() -> Vector2:
 	return Vector2(randi_range(0, map_size.x-1), randi_range(0, map_size.y-1))
-	
-
-#func is_game_running():
-#	return len($Multiplayer.connected_peer_ids) >= 2 and not is_game_over
-
 
 
 func can_reach_other_player(trap_positions: Array[Vector2]):
@@ -161,7 +156,8 @@ func can_reach_other_player(trap_positions: Array[Vector2]):
 		return true
 	else:
 		return false
-		
+
+
 func get_neighbors_for_tile(current_tile: Vector2, trap_positions: Array[Vector2]):
 	var neighbors = []
 	neighbors.append(Vector2(current_tile.x - 1, current_tile.y))
@@ -176,12 +172,14 @@ func get_neighbors_for_tile(current_tile: Vector2, trap_positions: Array[Vector2
 			valid_neighbors.append(neighbor)
 			
 	return valid_neighbors
-		
+
+
 func is_point_in_map(point: Vector2) -> bool:
 	if point.x >= 0 and point.x < map_size.x and point.y >= 0 and point.y < map_size.y:
 		return true
 	return false
-	
+
+
 func get_trap_positions() -> Array[Vector2]:
 	var trap_positions: Array[Vector2] = []
 	
@@ -189,6 +187,15 @@ func get_trap_positions() -> Array[Vector2]:
 		trap_positions.append(trap)
 		
 	return trap_positions
+
+
+@rpc("call_local", "reliable")
+func sync_traps():
+	var local_type = $Multiplayer.local_player_character.type
+	for trap in get_tree().get_nodes_in_group("trap"):
+		trap.visible = local_type == trap.type
+		# print(trap.type, " | ", local_type, " -> ", trap.type == local_type)
+		# trap.visible = trap.type == type
 
 
 @rpc("any_peer", "call_local", "reliable")
