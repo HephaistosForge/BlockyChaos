@@ -31,6 +31,9 @@ func die():
 		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BACK)
 	world.game_over()
 
+func win():
+	print("Win")
+
 func _physics_process(_delta):
 	if is_multiplayer_authority() and world.is_game_running():
 		
