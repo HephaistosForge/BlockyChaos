@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://world/gameover.gd" id="5_kpq7d"]
 [ext_resource type="AudioStream" uid="uid://dkphkpim1ixa5" path="res://world/music/background.mp3" id="6_ftcl4"]
 [ext_resource type="Script" path="res://world/restart.gd" id="7_v7vsj"]
-[ext_resource type="Theme" path="res://world/default_theme.tres" id="8_djg35"]
+[ext_resource type="Theme" uid="uid://dp58tqgvn7o0e" path="res://world/default_theme.tres" id="8_djg35"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bkkiv"]
 font_size = 99
