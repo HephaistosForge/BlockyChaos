@@ -16,6 +16,9 @@ properties/2/sync = true
 properties/3/path = NodePath(".:type")
 properties/3/spawn = true
 properties/3/sync = true
+properties/4/path = NodePath("SawbladeSprite:modulate")
+properties/4/spawn = true
+properties/4/sync = true
 
 [node name="Trap" type="Node2D" groups=["trap"]]
 z_index = 5

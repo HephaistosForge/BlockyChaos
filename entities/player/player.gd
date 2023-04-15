@@ -27,6 +27,8 @@ func time():
 
 
 func die():
+	world.rpc("set_game_paused", true)
+	
 	$AudioWrong.play()
 	var tween = create_tween()
 	tween.tween_property(self, "scale", Vector2.ONE, .05) \
@@ -35,8 +37,6 @@ func die():
 		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BACK).from_current()
 	tween.parallel().tween_property(self, "scale", Vector2.ONE * .2, 1) \
 		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BACK)
-	
-	world.rpc("set_game_paused", true)
 	
 	# Bug Fix: Clicking "Ready" Button too early before tween animation is
 	# done causes Player to be resetted "inside the animation"
@@ -84,8 +84,8 @@ func _physics_process(_delta):
 					.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 				
 				if _is_on_deadly_tile:
-					#if tile in world.traps:
-					#	world.traps[tile].visible = true
+					# instance_from_id(world.traps[tile].object_id).rpc("fade_in") # NullPointerException
+					
 					die()
 				
 				next_allowed_movement_time = time() + movement_delay
