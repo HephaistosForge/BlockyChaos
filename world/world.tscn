@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://world/floor.gd" id="1_qsj2w"]
 [ext_resource type="Script" path="res://world/multiplayer.gd" id="2_c2arv"]
 [ext_resource type="Texture2D" uid="uid://ciyu1yyim3ms4" path="res://world/Loading.png" id="3_bj73h"]
-[ext_resource type="Script" path="res://world/spinning.gd" id="4_pu5fr"]
+[ext_resource type="Script" path="res://world/loading_spinner.gd" id="4_6jm1b"]
 [ext_resource type="Script" path="res://world/big_floating_message_container.gd" id="5_f3boa"]
 [ext_resource type="Script" path="res://world/gameover.gd" id="5_kpq7d"]
 [ext_resource type="AudioStream" uid="uid://dkphkpim1ixa5" path="res://world/music/background.mp3" id="6_ftcl4"]
@@ -62,16 +62,11 @@ layout_mode = 2
 text = "Waiting for other player"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Waiting"]
-layout_mode = 2
-alignment = 1
-
-[node name="LoadingIcon" type="TextureRect" parent="Waiting/HBoxContainer"]
-custom_minimum_size = Vector2(100, 100)
-layout_mode = 2
+[node name="Sprite2D" type="Sprite2D" parent="Waiting"]
+position = Vector2(500, 575)
+scale = Vector2(0.1, 0.1)
 texture = ExtResource("3_bj73h")
-expand_mode = 1
-script = ExtResource("4_pu5fr")
+script = ExtResource("4_6jm1b")
 
 [node name="BigFloatingMessageContainer" type="VBoxContainer" parent="."]
 visible = false
