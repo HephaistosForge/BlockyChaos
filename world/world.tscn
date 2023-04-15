@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://c48wvhcpnqhb1"]
+[gd_scene load_steps=13 format=3 uid="uid://c48wvhcpnqhb1"]
 
 [ext_resource type="Script" path="res://world/world.gd" id="1_nu8f6"]
 [ext_resource type="Script" path="res://world/floor.gd" id="1_qsj2w"]
@@ -12,12 +12,6 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_bkkiv"]
 font_size = 99
-
-[sub_resource type="InputEventKey" id="InputEventKey_hgeco"]
-keycode = 65
-
-[sub_resource type="Shortcut" id="Shortcut_a1hej"]
-events = [SubResource("InputEventKey_hgeco")]
 
 [sub_resource type="Environment" id="Environment_w6v8t"]
 background_mode = 3
@@ -95,7 +89,8 @@ script = ExtResource("5_kpq7d")
 
 [node name="Restart" type="Button" parent="BigFloatingMessageContainer"]
 layout_mode = 2
-shortcut = SubResource("Shortcut_a1hej")
+shortcut_feedback = false
+shortcut_in_tooltip = false
 text = "Restart"
 script = ExtResource("7_v7vsj")
 
