@@ -1,13 +1,12 @@
 extends CharacterBody2D
 
 @export var speed = 400
-@export var tile = Vector2.ZERO
+@export var tile: Vector2 = Vector2.ZERO
 
 var movement_delay = 0.3
 var next_allowed_movement_time = -1
 var world: Node2D
 var type: String
-var can_move = true
 
 var _initial_scale: Vector2
 var _initial_rotation: float
@@ -28,30 +27,34 @@ func time():
 
 
 func die():
-	if is_multiplayer_authority():
-		$AudioWrong.play()
-		var tween = create_tween()
-		tween.tween_property(self, "scale", Vector2.ONE, .05) \
-			.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-		tween.parallel().tween_property(self, "rotation", 2 * PI, 1) \
-			.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BACK).from_current()
-		tween.parallel().tween_property(self, "scale", Vector2.ONE * .2, 1) \
-			.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BACK)
-		
-		rpc("update_can_move", false)
-		rpc("display_big_floating_message", Globals.GAME_OVER_TEXT)
+	$AudioWrong.play()
+	var tween = create_tween()
+	tween.tween_property(self, "scale", Vector2.ONE, .05) \
+		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.parallel().tween_property(self, "rotation", 2 * PI, 1) \
+		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BACK).from_current()
+	tween.parallel().tween_property(self, "scale", Vector2.ONE * .2, 1) \
+		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BACK)
+	
+	world.rpc("set_game_paused", true)
+	
+	# Bug Fix: Clicking "Ready" Button too early before tween animation is
+	# done causes Player to be resetted "inside the animation"
+	# Therefore, await
+	await get_tree().create_timer(1.0).timeout
+	rpc("display_big_floating_message", Globals.GAME_OVER_TEXT)
 
 
 func win():
 	# Ideas, Tweens:
 	# Center to player position
 	# Zoom slightly in
-	rpc("update_can_move", false)
+	world.rpc("set_game_paused", true)
 	rpc("display_big_floating_message", Globals.WINNING_TEXT)
 
 
 func _physics_process(_delta):
-	if is_multiplayer_authority() and can_move:
+	if is_multiplayer_authority() and !world.is_game_paused:
 		var direction = Input.get_vector("left", "right", "up", "down")
 		
 		# Ensure that you cannot move diagonally
@@ -122,7 +125,7 @@ func restart() -> void:
 	scale = _initial_scale
 	rotation = _initial_rotation
 	
-	rpc("update_can_move", true)
+	world.rpc("set_game_paused", false)
 	rpc("hide_big_floating_message")
 
 
@@ -134,11 +137,6 @@ func _input(event):
 			(event.position - Vector2(get_viewport().size.x / 2, get_viewport().size.y / 2) - lefteye).normalized() * 4)
 		$Body/RightEye/RightEyePupil.set_global_position(righteye + \
 			(event.position - Vector2(get_viewport().size.x / 2, get_viewport().size.y / 2) - righteye).normalized() * 4)
-
-
-@rpc("any_peer", "call_local", "reliable")
-func update_can_move(state: bool) -> void:
-	can_move = state
 
 
 @rpc("any_peer", "call_local", "reliable")

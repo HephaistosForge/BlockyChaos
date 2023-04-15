@@ -1,5 +1,8 @@
 extends Node2D
 
+@export var is_game_paused: bool = false
+@export var traps = {}
+
 var map_size = Vector2(10, 10)
 var box_size = 100
 var line_width = 8
@@ -13,7 +16,6 @@ var line_color = Color(.1, .1, .1, 1)
 # Number of traps is 8 + difficulty per player color
 var difficulty = 2
 
-@export var traps = {}
 var trap_scene = preload("res://entities/trap/trap.tscn")
 var tile_scene = preload("res://world/tile/tile.tscn")
 var bullet_scene = preload("res://entities/bullet/bullet.tscn")
@@ -187,3 +189,8 @@ func get_trap_positions() -> Array[Vector2]:
 		trap_positions.append(trap)
 		
 	return trap_positions
+
+
+@rpc("any_peer", "call_local", "reliable")
+func set_game_paused(state: bool) -> void:
+	is_game_paused = state
