@@ -9,7 +9,7 @@
 [ext_resource type="Script" path="res://world/gameover.gd" id="5_kpq7d"]
 [ext_resource type="AudioStream" uid="uid://dkphkpim1ixa5" path="res://world/music/background.mp3" id="6_ftcl4"]
 [ext_resource type="Script" path="res://world/restart.gd" id="7_v7vsj"]
-[ext_resource type="Theme" uid="uid://dp58tqgvn7o0e" path="res://world/default_theme.tres" id="8_djg35"]
+[ext_resource type="Theme" path="res://world/default_theme.tres" id="8_djg35"]
 [ext_resource type="Texture2D" uid="uid://cg4vntieyrsut" path="res://entities/player/sprites/MrRed.png" id="11_jmlav"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bkkiv"]
@@ -66,6 +66,8 @@ script = ExtResource("4_6jm1b")
 
 [node name="BigFloatingMessageContainer" type="VBoxContainer" parent="."]
 visible = false
+z_index = 100
+z_as_relative = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
