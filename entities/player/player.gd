@@ -51,7 +51,7 @@ func _physics_process(_delta):
 			if can_move:
 				$AudioMove.play()
 				tile = new_tile
-				var is_dead = world.is_tile_deadly(tile)
+				var _is_dead = world.is_tile_deadly(tile)
 			
 				var new_position = world.tile_to_world_coord(tile)
 				get_tree().create_tween().tween_property(self, "position", new_position, movement_delay) \
@@ -66,7 +66,7 @@ func _physics_process(_delta):
 					.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 					
 					
-				if is_dead:
+				if _is_dead:
 					#if tile in world.traps:
 					#	world.traps[tile].visible = true
 					die()
