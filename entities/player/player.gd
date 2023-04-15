@@ -42,6 +42,8 @@ func die():
 	# done causes Player to be resetted "inside the animation"
 	# Therefore, await
 	await get_tree().create_timer(1.0).timeout
+	
+	$death.emitting = true
 	rpc("display_big_floating_message", Globals.GAME_OVER_TEXT)
 
 
@@ -119,6 +121,8 @@ func init_as_player(color, tile_coord, player_type: String):
 
 func restart() -> void:
 	# "Manual" restart, session is kept
+	$death.emitting = false
+	
 	tile = Vector2.ZERO if type == "red" else Vector2.ONE * get_parent().get_parent().map_size - Vector2.ONE
 	
 	position = world.tile_to_world_coord(tile)

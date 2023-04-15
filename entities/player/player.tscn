@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://2qhapug04qh1"]
+[gd_scene load_steps=12 format=3 uid="uid://2qhapug04qh1"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_3yqfr"]
 [ext_resource type="Texture2D" uid="uid://ciqvshb2x1uxb" path="res://entities/player/sprites/Body.png" id="2_rh600"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bf1ov78ypuakn" path="res://entities/player/sprites/EyeBlack.png" id="5_2gsgv"]
 [ext_resource type="AudioStream" uid="uid://bcjarlbt51d16" path="res://entities/player/audio/wrong.wav" id="6_yek66"]
 [ext_resource type="AudioStream" uid="uid://bcyu606so3hx7" path="res://entities/player/audio/move.wav" id="7_aqrrm"]
+[ext_resource type="PackedScene" uid="uid://byphd6o6oq2p" path="res://particle_effects/death.tscn" id="8_6bo2p"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mqqhx"]
 size = Vector2(85, 82)
@@ -30,6 +31,9 @@ properties/4/sync = true
 properties/5/path = NodePath(".:scale")
 properties/5/spawn = true
 properties/5/sync = true
+properties/6/path = NodePath("death:emitting")
+properties/6/spawn = true
+properties/6/sync = true
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k6uk4"]
 radius = 4.0
@@ -93,3 +97,9 @@ gravity_scale = 0.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 shape = SubResource("CircleShape2D_k6uk4")
 disabled = true
+
+[node name="death" parent="." instance=ExtResource("8_6bo2p")]
+emitting = false
+amount = 30
+lifetime = 5.0
+one_shot = true
