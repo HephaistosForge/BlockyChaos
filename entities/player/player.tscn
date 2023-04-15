@@ -42,11 +42,11 @@ script = ExtResource("1_3yqfr")
 position = Vector2(-19, -12)
 scale = Vector2(0.25, 0.25)
 polygon = PackedVector2Array(-20, -32, 4, -36, 28, -28, 36, -8, 36, 12, 24, 32, 0, 40, -24, 28, -36, 8, -32, -16, -20, -32, -144, -248, -268, 64, -176, 264, 280, 236, 272, -148, -144, -248)
+disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_mqqhx")
-disabled = true
 
 [node name="Body" type="Node2D" parent="."]
 

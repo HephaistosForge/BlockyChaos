@@ -71,7 +71,7 @@ func start_game():
 	for player in get_tree().get_nodes_in_group("player"):
 		print("goal at ", player.position)
 		var goal = goal_scene.instantiate()
-		add_child(goal)
+		add_child(goal, true)
 		goal.position = player.position
 		goal.type = "red" if player.type == "blue" else "blue"
 		goal.modulate = Color.RED if goal.type == "red" else Color.BLUE

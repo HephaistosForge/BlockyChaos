@@ -5,5 +5,5 @@ extends Area2D
 
 
 func _on_body_entered(body):
-	if body.type == type:
-		body.die()
+	print(body)
+	body.die()
