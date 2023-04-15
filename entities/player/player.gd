@@ -1,42 +1,57 @@
 extends CharacterBody2D
 
 @export var speed = 400
+@export var tile = Vector2.ZERO
 
 var movement_delay = 0.3
 var next_allowed_movement_time = -1
-var world
+var world: Node2D
 var type: String
-var is_dead = false
-@export var tile = Vector2.ZERO
+var can_move = true
 
+var _initial_scale: Vector2
+var _initial_rotation: float
 
 
 func _ready():
 	name = str(get_multiplayer_authority())
-
+	self.add_to_group("players")
+	
+	_initial_scale = scale
+	_initial_rotation = rotation
+	
 	# print("Player spawned. Position: %s" % [position])
+
 
 func time():
 	return Time.get_unix_time_from_system()
-	
+
+
 func die():
-	is_dead = true
-	$AudioWrong.play()
-	var tween = create_tween()
-	tween.tween_property(self, "scale", Vector2.ONE, .05) \
-		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-	tween.parallel().tween_property(self, "rotation", 2 * PI, 1) \
-		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BACK).from_current()
-	tween.parallel().tween_property(self, "scale", Vector2.ONE * .2, 1) \
-		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BACK)
-	world.game_over()
+	if is_multiplayer_authority():
+		$AudioWrong.play()
+		var tween = create_tween()
+		tween.tween_property(self, "scale", Vector2.ONE, .05) \
+			.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+		tween.parallel().tween_property(self, "rotation", 2 * PI, 1) \
+			.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BACK).from_current()
+		tween.parallel().tween_property(self, "scale", Vector2.ONE * .2, 1) \
+			.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BACK)
+		
+		rpc("update_can_move", false)
+		rpc("display_big_floating_message", Globals.GAME_OVER_TEXT)
+
 
 func win():
-	print("Win")
+	# Ideas, Tweens:
+	# Center to player position
+	# Zoom slightly in
+	rpc("update_can_move", false)
+	rpc("display_big_floating_message", Globals.WINNING_TEXT)
+
 
 func _physics_process(_delta):
-	if is_multiplayer_authority() and world.is_game_running():
-		
+	if is_multiplayer_authority() and can_move:
 		var direction = Input.get_vector("left", "right", "up", "down")
 		
 		# Ensure that you cannot move diagonally
@@ -46,17 +61,17 @@ func _physics_process(_delta):
 		if direction.length() != 0 and next_allowed_movement_time <= time():
 			var new_tile = world.round_vec2(tile + direction)
 			
-			var can_move = world.is_legal_tile_coord(new_tile) and not world.is_tile_occupied(new_tile)
+			var _can_move_there = world.is_legal_tile_coord(new_tile) and not world.is_tile_occupied(new_tile)
 			
-			if can_move:
+			if _can_move_there:
 				$AudioMove.play()
 				tile = new_tile
-				var _is_dead = world.is_tile_deadly(tile)
+				var _is_on_deadly_tile: bool = world.is_tile_deadly(tile)
 			
 				var new_position = world.tile_to_world_coord(tile)
 				get_tree().create_tween().tween_property(self, "position", new_position, movement_delay) \
 					.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_SINE)
-					
+				
 				# Squish animation while moving
 				var animation_scale = Vector2(0.9, 0.9) + (direction * direction) * 0.4
 				var tween = get_tree().create_tween()
@@ -64,13 +79,12 @@ func _physics_process(_delta):
 					.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 				tween.tween_property(self, "scale", Vector2.ONE, movement_delay / 3 * 2) \
 					.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-					
-					
-				if _is_dead:
+				
+				if _is_on_deadly_tile:
 					#if tile in world.traps:
 					#	world.traps[tile].visible = true
 					die()
-					
+				
 				next_allowed_movement_time = time() + movement_delay
 			else:
 				$AudioWrong.play()
@@ -85,8 +99,7 @@ func _physics_process(_delta):
 					.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 				tween.tween_property(self, "rotation", 0, anim_time) \
 					.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-				
-		
+
 
 @rpc("any_peer")
 func init_as_player(color, tile_coord, player_type: String):
@@ -101,6 +114,17 @@ func init_as_player(color, tile_coord, player_type: String):
 	position = world.tile_to_world_coord(tile)
 
 
+func restart() -> void:
+	# "Manual" restart, session is kept
+	tile = Vector2.ZERO if type == "red" else Vector2.ONE * get_parent().get_parent().map_size - Vector2.ONE
+	
+	position = world.tile_to_world_coord(tile)
+	scale = _initial_scale
+	rotation = _initial_rotation
+	
+	rpc("update_can_move", true)
+	rpc("hide_big_floating_message")
+
 
 func _input(event):
 	if event is InputEventMouseMotion and is_multiplayer_authority():
@@ -110,3 +134,18 @@ func _input(event):
 			(event.position - Vector2(get_viewport().size.x / 2, get_viewport().size.y / 2) - lefteye).normalized() * 4)
 		$Body/RightEye/RightEyePupil.set_global_position(righteye + \
 			(event.position - Vector2(get_viewport().size.x / 2, get_viewport().size.y / 2) - righteye).normalized() * 4)
+
+
+@rpc("any_peer", "call_local", "reliable")
+func update_can_move(state: bool) -> void:
+	can_move = state
+
+
+@rpc("any_peer", "call_local", "reliable")
+func display_big_floating_message(text) -> void:
+	Globals.display_big_floating_message(text)
+
+
+@rpc("any_peer", "call_local", "reliable")
+func hide_big_floating_message() -> void:
+	Globals.hide_big_floating_message()

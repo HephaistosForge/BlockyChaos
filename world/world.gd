@@ -5,7 +5,7 @@ var box_size = 100
 var line_width = 8
 var line_color = Color(.1, .1, .1, 1)
 
-var is_game_over = false
+#var is_game_over = false
 
 # Number starting at 1, at 2 bullets start. 
 # Each completed level increases difficulty by one
@@ -40,12 +40,11 @@ func add_random_traps(number: int, type: String):
 			at_tile = random_tile()
 			if at_tile not in traps and at_tile not in [Vector2(0, 0), map_size - Vector2.ONE]:
 				break
-				
+		
 		var trap_positions = get_trap_positions()
 		trap_positions.append(at_tile)
 		if can_reach_other_player(trap_positions):
 			add_trap(at_tile, type)
-
 		
 func add_random_bullet_spawner(type: String):
 	var bullet_spawner = bullet_spawner_scene.instantiate()
@@ -68,8 +67,8 @@ func sync_traps():
 	
 func start_game():
 	$Waiting.visible = false
-	add_random_traps(50, "red")
-	add_random_traps(50, "blue")
+	add_random_traps(10, "red")
+	add_random_traps(10, "blue")
 	add_random_bullet_spawner("red")
 	add_random_bullet_spawner("blue")
 	for player in get_tree().get_nodes_in_group("player"):
@@ -77,7 +76,14 @@ func start_game():
 		var goal = goal_scene.instantiate()
 		add_child(goal, true)
 		goal.position = player.position
-		goal.type = "red" if player.type == "blue" else "blue"
+		
+		if player.type == "blue":
+			goal.type = "red"
+		elif player.type == "red":
+			goal.type = "blue"
+		else:
+			printerr("Could not determine player type!")
+		
 		goal.modulate = Color.RED if goal.type == "red" else Color.BLUE
 	
 	for y in map_size.y:
@@ -95,12 +101,7 @@ func local_player_type():
 			
 func is_tile_deadly(tile_coord):
 	return tile_coord in traps
-	
-func game_over():
-	is_game_over = true
-	$GameOver.visible = true
 
-# Coordinates
 
 func is_tile_occupied(tile) -> bool:
 	for player in get_tree().get_nodes_in_group("player"):
@@ -131,8 +132,10 @@ func random_tile() -> Vector2:
 	return Vector2(randi_range(0, map_size.x-1), randi_range(0, map_size.y-1))
 	
 
-func is_game_running():
-	return len($Multiplayer.connected_peer_ids) >= 2 and not is_game_over
+#func is_game_running():
+#	return len($Multiplayer.connected_peer_ids) >= 2 and not is_game_over
+
+
 
 func can_reach_other_player(trap_positions: Array[Vector2]):
 	var visited_tiles = []

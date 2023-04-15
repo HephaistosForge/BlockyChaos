@@ -1,12 +1,14 @@
-[gd_scene load_steps=13 format=3 uid="uid://c48wvhcpnqhb1"]
+[gd_scene load_steps=15 format=3 uid="uid://c48wvhcpnqhb1"]
 
 [ext_resource type="Script" path="res://world/world.gd" id="1_nu8f6"]
 [ext_resource type="Script" path="res://world/floor.gd" id="1_qsj2w"]
 [ext_resource type="Script" path="res://world/multiplayer.gd" id="2_c2arv"]
 [ext_resource type="Texture2D" uid="uid://ciyu1yyim3ms4" path="res://world/Loading.png" id="3_bj73h"]
 [ext_resource type="Script" path="res://world/spinning.gd" id="4_pu5fr"]
+[ext_resource type="Script" path="res://world/big_floating_message_container.gd" id="5_f3boa"]
 [ext_resource type="Script" path="res://world/gameover.gd" id="5_kpq7d"]
 [ext_resource type="AudioStream" uid="uid://dkphkpim1ixa5" path="res://world/music/background.mp3" id="6_ftcl4"]
+[ext_resource type="Script" path="res://world/restart.gd" id="7_v7vsj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_bkkiv"]
 font_size = 99
@@ -27,12 +29,9 @@ properties/0/sync = true
 properties/1/path = NodePath("Menu:visible")
 properties/1/spawn = true
 properties/1/sync = true
-properties/2/path = NodePath("GameOver:visible")
+properties/2/path = NodePath(".:traps")
 properties/2/spawn = true
 properties/2/sync = true
-properties/3/path = NodePath(".:traps")
-properties/3/spawn = true
-properties/3/sync = true
 
 [node name="World" type="Node2D" groups=["world"]]
 script = ExtResource("1_nu8f6")
@@ -74,7 +73,7 @@ texture = ExtResource("3_bj73h")
 expand_mode = 1
 script = ExtResource("4_pu5fr")
 
-[node name="GameOver" type="VBoxContainer" parent="."]
+[node name="BigFloatingMessageContainer" type="VBoxContainer" parent="."]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
@@ -89,19 +88,21 @@ grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(500, 515)
 alignment = 1
+script = ExtResource("5_f3boa")
 
-[node name="GameOver" type="Label" parent="GameOver"]
+[node name="BigFloatingMessage" type="Label" parent="BigFloatingMessageContainer"]
 layout_mode = 2
-text = "Game Over!"
+text = "_"
 label_settings = SubResource("LabelSettings_bkkiv")
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("5_kpq7d")
 
-[node name="Restart" type="Button" parent="GameOver"]
+[node name="Restart" type="Button" parent="BigFloatingMessageContainer"]
 layout_mode = 2
 shortcut = SubResource("Shortcut_a1hej")
 text = "Restart"
+script = ExtResource("7_v7vsj")
 
 [node name="Menu" type="VBoxContainer" parent="."]
 anchors_preset = 15
@@ -142,8 +143,8 @@ replication_config = SubResource("SceneReplicationConfig_oorh6")
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_ftcl4")
-autoplay = true
 
+[connection signal="button_down" from="BigFloatingMessageContainer/Restart" to="BigFloatingMessageContainer/Restart" method="_on_button_down"]
 [connection signal="button_up" from="Menu/Host" to="Multiplayer" method="on_host"]
 [connection signal="button_up" from="Menu/Join" to="Multiplayer" method="on_join"]
 [connection signal="button_up" from="Menu/Exit" to="Multiplayer" method="_on_exit"]
