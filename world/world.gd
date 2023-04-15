@@ -40,7 +40,12 @@ func add_random_traps(number: int, type: String):
 			at_tile = random_tile()
 			if at_tile not in traps and at_tile not in [Vector2(0, 0), map_size - Vector2.ONE]:
 				break
-		add_trap(at_tile, type)
+				
+		var trap_positions = get_trap_positions()
+		trap_positions.append(at_tile)
+		if can_reach_other_player(trap_positions):
+			add_trap(at_tile, type)
+
 		
 func add_random_bullet_spawner(type: String):
 	var bullet_spawner = bullet_spawner_scene.instantiate()
@@ -63,8 +68,8 @@ func sync_traps():
 	
 func start_game():
 	$Waiting.visible = false
-	add_random_traps(10, "red")
-	add_random_traps(10, "blue")
+	add_random_traps(50, "red")
+	add_random_traps(50, "blue")
 	add_random_bullet_spawner("red")
 	add_random_bullet_spawner("blue")
 	for player in get_tree().get_nodes_in_group("player"):
@@ -128,3 +133,54 @@ func random_tile() -> Vector2:
 
 func is_game_running():
 	return len($Multiplayer.connected_peer_ids) >= 2 and not is_game_over
+
+func can_reach_other_player(trap_positions: Array[Vector2]):
+	var visited_tiles = []
+	var tile_queue = []
+	var start_tile = Vector2(0, 0)
+	var end_tile = Vector2(9, 9)
+	
+	visited_tiles.append(start_tile)
+	tile_queue.append(start_tile)
+	
+	while tile_queue:
+		var current_tile = tile_queue.pop_front()
+		var neighbors = get_neighbors_for_tile(current_tile, trap_positions)
+		
+		for neighbor in neighbors:
+			if neighbor not in visited_tiles:
+				visited_tiles.append(neighbor)
+				tile_queue.append(neighbor)
+			
+	if end_tile in visited_tiles:
+		return true
+	else:
+		return false
+		
+func get_neighbors_for_tile(current_tile: Vector2, trap_positions: Array[Vector2]):
+	var neighbors = []
+	neighbors.append(Vector2(current_tile.x - 1, current_tile.y))
+	neighbors.append(Vector2(current_tile.x + 1, current_tile.y))
+	neighbors.append(Vector2(current_tile.x, current_tile.y - 1))
+	neighbors.append(Vector2(current_tile.x, current_tile.y + 1))
+	
+	var valid_neighbors = []
+	
+	for neighbor in neighbors:
+		if is_point_in_map(neighbor) and not neighbor in trap_positions:
+			valid_neighbors.append(neighbor)
+			
+	return valid_neighbors
+		
+func is_point_in_map(point: Vector2) -> bool:
+	if point.x >= 0 and point.x < map_size.x and point.y >= 0 and point.y < map_size.y:
+		return true
+	return false
+	
+func get_trap_positions() -> Array[Vector2]:
+	var trap_positions: Array[Vector2] = []
+	
+	for trap in traps:
+		trap_positions.append(trap)
+		
+	return trap_positions
