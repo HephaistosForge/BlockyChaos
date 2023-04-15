@@ -56,7 +56,6 @@ func add_random_bullet_spawner(type: String):
 @rpc("call_local")
 func sync_traps():
 	var local_type = $Multiplayer.local_player_character.type
-	print("sync traps", local_type, " ", $Multiplayer.local_player_character.type)
 	for trap in get_tree().get_nodes_in_group("trap"):
 		trap.visible = local_type == trap.type
 		# print(trap.type, " | ", local_type, " -> ", trap.type == local_type)
@@ -69,7 +68,7 @@ func start_game():
 	add_random_bullet_spawner("red")
 	add_random_bullet_spawner("blue")
 	for player in get_tree().get_nodes_in_group("player"):
-		print("goal at ", player.position)
+		# print("goal at ", player.position)
 		var goal = goal_scene.instantiate()
 		add_child(goal, true)
 		goal.position = player.position
@@ -85,6 +84,9 @@ func start_game():
 	# Call deferred is important here because otherwise godot does not have enough
 	# time to sync traps with the other player
 	call_deferred("rpc", "sync_traps")
+	
+func local_player_type():
+	return $Multiplayer.local_player_character.type
 			
 func is_tile_deadly(tile_coord):
 	return tile_coord in traps

@@ -62,12 +62,11 @@ func add_new_player(peer_id) -> void:
 	var type = "red" if peer_id == 1 else "blue"
 	self.add_child(player_node)
 	players.append(player_node)
-	print(players)
+	# print(players)
 	#if is_multiplayer_authority():
 	#player_node.rpc("init_as_player", color, pos, type)
 	player_node.init_as_player(color, pos, type)
 	# player_node.update_traps()
-	
 	
 	
 	if peer_id == multiplayer.get_unique_id():
