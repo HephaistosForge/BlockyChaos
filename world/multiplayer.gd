@@ -10,6 +10,8 @@ const MAX_PLAYERS = 2
 
 var server: bool
 
+var players = []
+var player_scene = preload("res://entities/player/player.tscn")
 var connected_peer_ids = []
 var player_colors = [Color.RED, Color.BLUE, Color.YELLOW, Color.GREEN]
 var local_player_character # the Client
@@ -27,7 +29,6 @@ func on_host() -> void:
 	multiplayer.multiplayer_peer = multiplayer_peer
 	
 	add_new_player(1)
-	get_parent().start_game()
 	
 	# multiplayer_peer.peer_connected.connect(
 	multiplayer.peer_connected.connect(
@@ -42,6 +43,7 @@ func on_host() -> void:
 			add_previously_connected_players.rpc_id(new_peer_id, connected_peer_ids)
 			
 			add_new_player(new_peer_id)
+			get_parent().start_game()
 	)
 
 
@@ -53,17 +55,23 @@ func on_join() -> void:
 
 func add_new_player(peer_id) -> void:
 	connected_peer_ids.append(peer_id)
-	var player_node = preload("res://entities/player/player.tscn").instantiate()
+	var player_node = player_scene.instantiate()
 	player_node.set_multiplayer_authority(peer_id)
 	var color = Color.RED if peer_id == 1 else Color.BLUE
 	var pos = Vector2.ZERO if peer_id == 1 else Vector2.ONE * get_parent().map_size - Vector2.ONE
 	var type = "red" if peer_id == 1 else "blue"
 	self.add_child(player_node)
+	players.append(player_node)
+	print(players)
+	#if is_multiplayer_authority():
+	#player_node.rpc("init_as_player", color, pos, type)
 	player_node.init_as_player(color, pos, type)
+	# player_node.update_traps()
+	
+	
 	
 	if peer_id == multiplayer.get_unique_id():
 		local_player_character = player_node
-
 
 @rpc
 func add_newly_connected_player_character(new_peer_id) -> void:

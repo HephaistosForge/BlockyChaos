@@ -1,6 +1,6 @@
 extends Node2D
 
-var type: String
+@export var type: String
 
 func _ready():
 	var tween = create_tween()
@@ -9,4 +9,4 @@ func _ready():
 		.set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_IN_OUT)
 	tween.tween_property(self, "rotation", 0, randf()).from_current()
 	
-	self.visible = type != Globals.local_player_type
+	# self.visible = type != Globals.local_player_type

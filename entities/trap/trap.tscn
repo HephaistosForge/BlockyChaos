@@ -13,6 +13,9 @@ properties/1/sync = true
 properties/2/path = NodePath(".:modulate")
 properties/2/spawn = true
 properties/2/sync = true
+properties/3/path = NodePath(".:type")
+properties/3/spawn = true
+properties/3/sync = true
 
 [node name="Trap" type="Node2D" groups=["trap"]]
 z_index = 5

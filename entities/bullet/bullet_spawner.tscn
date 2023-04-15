@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://du7w3rylj8dyl"]
+
+[ext_resource type="Script" path="res://entities/bullet/bullet_spawner.gd" id="1_cbopw"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_joe2n"]
+properties/0/path = NodePath(".:type")
+properties/0/spawn = true
+properties/0/sync = true
+
+[node name="BulletSpawner" type="Node2D"]
+script = ExtResource("1_cbopw")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_joe2n")
+
+[node name="Target" type="Node2D" parent="."]
+position = Vector2(1000, 0)
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

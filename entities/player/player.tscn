@@ -9,7 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://bcyu606so3hx7" path="res://entities/player/audio/move.wav" id="7_aqrrm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mqqhx"]
-size = Vector2(100, 100)
+size = Vector2(85, 82)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_7i3tb"]
 properties/0/path = NodePath(".:tile")
@@ -21,13 +21,21 @@ properties/1/sync = true
 properties/2/path = NodePath("Body/RightEye/RightEyePupil:position")
 properties/2/spawn = true
 properties/2/sync = true
+properties/3/path = NodePath(".:position")
+properties/3/spawn = true
+properties/3/sync = true
+properties/4/path = NodePath(".:rotation")
+properties/4/spawn = true
+properties/4/sync = true
+properties/5/path = NodePath(".:scale")
+properties/5/spawn = true
+properties/5/sync = true
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k6uk4"]
 radius = 4.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
-collision_layer = 17
-collision_mask = 17
+collision_mask = 19
 script = ExtResource("1_3yqfr")
 
 [node name="CollisionShape2D2" type="CollisionPolygon2D" parent="."]
@@ -80,8 +88,8 @@ replication_config = SubResource("SceneReplicationConfig_7i3tb")
 [node name="RigidBody2D" type="RigidBody2D" parent="."]
 position = Vector2(-19, -12)
 collision_layer = 16
-collision_mask = 16
 gravity_scale = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
 shape = SubResource("CircleShape2D_k6uk4")
+disabled = true
