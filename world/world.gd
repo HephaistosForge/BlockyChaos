@@ -67,7 +67,7 @@ func start_game():
 	add_random_traps(10, "blue")
 	add_random_bullet_spawner("red")
 	add_random_bullet_spawner("blue")
-	for player in get_tree().get_nodes_in_group("player"):
+	for player in get_tree().get_nodes_in_group("players"):
 		# print("goal at ", player.position)
 		var goal = goal_scene.instantiate()
 		add_child(goal, true)
@@ -102,7 +102,7 @@ func is_tile_deadly(tile_coord):
 
 
 func is_tile_occupied(tile) -> bool:
-	for player in get_tree().get_nodes_in_group("player"):
+	for player in get_tree().get_nodes_in_group("players"):
 		# print(player.tile)
 		if (player.tile - tile).length() < 0.1:
 			return true

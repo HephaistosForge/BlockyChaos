@@ -6,7 +6,7 @@ func _ready():
 	$Body/BodySprite.self_modulate = color
 
 func _input(event):
-	if get_parent().is_visible() and event is InputEventMouseMotion and is_multiplayer_authority():
+	if get_parent().is_visible() and event is InputEventMouseMotion:
 		var lefteye = $Body/LeftEye.get_global_position()
 		var righteye = $Body/RightEye.get_global_position()
 		$Body/LeftEye/LeftEyePupil.set_global_position(lefteye + \

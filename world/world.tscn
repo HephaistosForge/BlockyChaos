@@ -29,6 +29,9 @@ properties/1/sync = true
 properties/2/path = NodePath(".:traps")
 properties/2/spawn = true
 properties/2/sync = true
+properties/3/path = NodePath("MenuBackground:visible")
+properties/3/spawn = true
+properties/3/sync = true
 
 [node name="World" type="Node2D" groups=["world"]]
 script = ExtResource("1_nu8f6")
