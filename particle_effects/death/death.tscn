@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpwaytudrfvo2"]
+
+[ext_resource type="Material" uid="uid://bdju50f0sd4ce" path="res://particle_effects/death/death.tres" id="1_aagra"]
+[ext_resource type="Texture2D" uid="uid://bhsj2hf3rerth" path="res://particle_effects/spark_particle.png" id="2_ujn76"]
+
+[node name="death" type="GPUParticles2D"]
+emitting = false
+amount = 40
+process_material = ExtResource("1_aagra")
+texture = ExtResource("2_ujn76")
+lifetime = 6.0
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0

@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bf1ov78ypuakn" path="res://entities/player/sprites/EyeBlack.png" id="5_2gsgv"]
 [ext_resource type="AudioStream" uid="uid://bcjarlbt51d16" path="res://entities/player/audio/wrong.wav" id="6_yek66"]
 [ext_resource type="AudioStream" uid="uid://bcyu606so3hx7" path="res://entities/player/audio/move.wav" id="7_aqrrm"]
-[ext_resource type="PackedScene" uid="uid://byphd6o6oq2p" path="res://particle_effects/death.tscn" id="8_6bo2p"]
+[ext_resource type="PackedScene" uid="uid://bpwaytudrfvo2" path="res://particle_effects/death/death.tscn" id="8_q2rcd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mqqhx"]
 size = Vector2(85, 82)
@@ -98,8 +98,4 @@ gravity_scale = 0.0
 shape = SubResource("CircleShape2D_k6uk4")
 disabled = true
 
-[node name="death" parent="." instance=ExtResource("8_6bo2p")]
-emitting = false
-amount = 30
-lifetime = 5.0
-one_shot = true
+[node name="death" parent="." instance=ExtResource("8_q2rcd")]

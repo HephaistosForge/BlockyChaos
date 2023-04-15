@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxbevqdrw48ny"]
+
+[ext_resource type="Material" uid="uid://dtgj8fteofd0n" path="res://particle_effects/bullet/bullet.tres" id="1_vjo05"]
+[ext_resource type="Texture2D" uid="uid://bhsj2hf3rerth" path="res://particle_effects/spark_particle.png" id="2_53q00"]
+
+[node name="bullet" type="GPUParticles2D"]
+amount = 5
+process_material = ExtResource("1_vjo05")
+texture = ExtResource("2_53q00")
