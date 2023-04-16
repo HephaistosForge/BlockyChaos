@@ -23,7 +23,7 @@ var goal_scene = preload("res://entities/goal/goal.tscn")
 var local_player
 
 
-func add_trap(at_tile: Vector2, type: String):
+func add_temp_trap(at_tile: Vector2, type: String):
 	var trap = trap_scene.instantiate()
 	# trap = $Spawner.spawn(trap_scene)
 	add_child(trap, true)
@@ -33,6 +33,23 @@ func add_trap(at_tile: Vector2, type: String):
 	trap.modulate = Color.RED if type == "red" else Color.BLUE
 	# trap.visible = local_player == "red"
 	trap.type = type
+	trap.tile = at_tile
+	trap.add_to_group("temp_trap")
+
+
+func add_trap(at_tile: Vector2, type: String):
+	var trap = trap_scene.instantiate()
+	# trap = $Spawner.spawn(trap_scene)
+	
+	var at_pos = tile_to_world_coord(at_tile)
+	traps[at_tile] = trap
+	trap.position = at_pos
+	trap.modulate = Color.RED if type == "red" else Color.BLUE
+	# trap.visible = local_player == "red"
+	trap.type = type
+	trap.tile = at_tile
+	add_child(trap, true)
+	print(traps)
 
 
 func add_random_traps(number: int, type: String):
@@ -52,19 +69,19 @@ func add_random_traps(number: int, type: String):
 func add_random_bullet_spawner(type: String):
 	var bullet_spawner = bullet_spawner_scene.instantiate()
 	# trap = $Spawner.spawn(trap_scene)
-	add_child(bullet_spawner, true)
 	var at_tile = Vector2(-1, randi_range(1, map_size.y-2))
 	var at_pos = tile_to_world_coord(at_tile)
 	bullet_spawner.position = at_pos
 	# trap.modulate = Color.RED if type == "red" else Color.BLUE
 	# trap.visible = local_player == "red"
 	bullet_spawner.type = type
+	add_child(bullet_spawner, true)
 
 
 func start_game():
 	$Waiting.visible = false
-	add_random_traps(10, "red")
-	add_random_traps(10, "blue")
+	add_random_traps(12, "red")
+	add_random_traps(12, "blue")
 	add_random_bullet_spawner("red")
 	add_random_bullet_spawner("blue")
 	for player in get_tree().get_nodes_in_group("players"):
@@ -96,8 +113,10 @@ func start_game():
 func local_player_type():
 	return $Multiplayer.local_player_character.type
 
-
+@rpc
 func is_tile_deadly(tile_coord):
+	print(tile_coord in traps)
+	print(traps)
 	return tile_coord in traps
 
 
@@ -189,7 +208,7 @@ func get_trap_positions() -> Array[Vector2]:
 	return trap_positions
 
 
-@rpc("call_local", "reliable")
+@rpc("call_local","reliable")
 func sync_traps():
 	var local_type = $Multiplayer.local_player_character.type
 	for trap in get_tree().get_nodes_in_group("trap"):
@@ -201,3 +220,7 @@ func sync_traps():
 @rpc("any_peer", "call_local", "reliable")
 func set_game_paused(state: bool) -> void:
 	is_game_paused = state
+
+
+func _on_animation_player_animation_finished(_anim_name: StringName) -> void:
+	Globals.did_show_intro = true

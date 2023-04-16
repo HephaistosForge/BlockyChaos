@@ -5,6 +5,8 @@ const WINNING_TEXT: String = "You both won!"
 
 var big_floating_messager_container: VBoxContainer
 
+var did_show_intro = false
+
 
 func display_big_floating_message(text: String) -> void:
 	big_floating_messager_container.display_message(text)

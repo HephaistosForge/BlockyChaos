@@ -7,6 +7,7 @@ const FADE_DURATION = 3.0
 @onready var sawblade_sprite: Sprite2D = $SawbladeSprite
 
 var _initial_visibility: bool
+var tile: Vector2
 
 func _ready():
 	_initial_visibility = self.visible

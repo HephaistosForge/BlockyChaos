@@ -1,6 +1,14 @@
-[gd_resource type="ParticleProcessMaterial" format=3 uid="uid://bdju50f0sd4ce"]
+[gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://bdju50f0sd4ce"]
+
+[sub_resource type="Curve" id="Curve_kngki"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.279123, 0.169675), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ais6n"]
+curve = SubResource("Curve_kngki")
 
 [resource]
+lifetime_randomness = 0.22
 particle_flag_disable_z = true
 spread = 180.0
 gravity = Vector3(0, 0, 0)
@@ -14,5 +22,6 @@ angle_min = 90.0
 angle_max = 90.0
 scale_min = 3.0
 scale_max = 4.0
+scale_curve = SubResource("CurveTexture_ais6n")
 color = Color(0, 0, 0, 1)
 turbulence_enabled = true

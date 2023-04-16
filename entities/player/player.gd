@@ -10,7 +10,9 @@ var type: String
 
 var _initial_scale: Vector2
 var _initial_rotation: float
+@export var goal_reached = false
 
+const BACK_TO_MENU_DIALOG = preload("res://ui/back_to_menu_dialog/back_to_menu_dialog.tscn")
 
 func _ready():
 	name = str(get_multiplayer_authority())
@@ -84,9 +86,11 @@ func _physics_process(_delta):
 					.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 				tween.tween_property(self, "scale", Vector2.ONE, movement_delay / 3 * 2) \
 					.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
-				
 				if _is_on_deadly_tile:
-					# instance_from_id(world.traps[tile].object_id).rpc("fade_in") # NullPointerException
+					var trap_color = "red" if type == "blue" else "blue"
+					get_tree().get_root().get_node("World").add_temp_trap(tile, trap_color)
+					#print(world.traps[tile])
+					#self.add_child(instance_from_id(world.traps[tile].object_id))#.rpc("fade_in") # NullPointerException
 					
 					die()
 				
@@ -104,6 +108,14 @@ func _physics_process(_delta):
 					.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 				tween.tween_property(self, "rotation", 0, anim_time) \
 					.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+
+
+func check_if_won():
+	var won = true
+	for player in get_tree().get_nodes_in_group("player"):
+		won = won and player.goal_reached
+	if won:
+		win()
 
 
 @rpc("any_peer")
@@ -141,6 +153,15 @@ func _input(event):
 			(event.position - Vector2(get_viewport().size.x / 2, get_viewport().size.y / 2) - lefteye).normalized() * 4)
 		$Body/RightEye/RightEyePupil.set_global_position(righteye + \
 			(event.position - Vector2(get_viewport().size.x / 2, get_viewport().size.y / 2) - righteye).normalized() * 4)
+	if event.is_action_pressed("back_to_menu") and is_multiplayer_authority():
+		show_back_to_menu_dialog()
+
+
+func show_back_to_menu_dialog():
+	var dialog = BACK_TO_MENU_DIALOG.instantiate()
+	dialog.peer = multiplayer.get_unique_id()
+	get_tree().get_root().add_child(dialog)
+	
 
 
 @rpc("any_peer", "call_local", "reliable")

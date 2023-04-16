@@ -1,0 +1,84 @@
+[gd_scene load_steps=4 format=3 uid="uid://k62ar27g8mmk"]
+
+[ext_resource type="Theme" uid="uid://dp58tqgvn7o0e" path="res://world/default_theme.tres" id="1_tmjs4"]
+[ext_resource type="Script" path="res://ui/back_to_menu_dialog/back_to_menu_dialog.gd" id="2_heyoq"]
+[ext_resource type="Texture2D" uid="uid://cg4vntieyrsut" path="res://entities/player/sprites/MrRed.png" id="3_i6lfw"]
+
+[node name="ConnectionError" type="PanelContainer"]
+offset_left = -186.0
+offset_top = -99.0
+offset_right = 186.0
+offset_bottom = 99.0
+pivot_offset = Vector2(186, 99)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_tmjs4")
+script = ExtResource("2_heyoq")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Return To Main Menu"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 20
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_i6lfw")
+expand_mode = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Do you want to leave your partner behind and return to main menu?"
+fit_content = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Dismiss" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Cancel"
+
+[node name="Confirm" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Confirm"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/Dismiss" to="." method="_on_dismiss_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/Confirm" to="." method="_on_confirm_pressed"]

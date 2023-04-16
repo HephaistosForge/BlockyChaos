@@ -14,4 +14,10 @@ func _ready():
 
 func _on_body_entered(body):
 	if body.type == type and can_detect:
-		body.win()
+		body.goal_reached = true
+		body.check_if_won()
+
+
+func _on_body_exited(body: Node2D) -> void:
+	if body.type == type and can_detect:
+		body.goal_reached = false
