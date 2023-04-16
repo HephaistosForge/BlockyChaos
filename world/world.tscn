@@ -450,11 +450,10 @@ theme = ExtResource("8_djg35")
 text = "Exit"
 
 [node name="ConnectionDialog" type="PanelContainer" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0)
-offset_left = -37.0
+offset_left = 20.0
 offset_top = 16.0
-offset_right = 343.0
+offset_right = 400.0
 offset_bottom = 329.0
 script = ExtResource("13_3bi47")
 
