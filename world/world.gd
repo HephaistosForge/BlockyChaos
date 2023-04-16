@@ -49,7 +49,7 @@ func add_trap(at_tile: Vector2, type: String):
 	trap.type = type
 	trap.tile = at_tile
 	add_child(trap, true)
-	print(traps)
+
 
 
 func add_random_traps(number: int, type: String):
@@ -115,8 +115,6 @@ func local_player_type():
 
 @rpc
 func is_tile_deadly(tile_coord):
-	print(tile_coord in traps)
-	print(traps)
 	return tile_coord in traps
 
 
