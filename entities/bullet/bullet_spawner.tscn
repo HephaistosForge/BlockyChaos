@@ -10,6 +10,6 @@ wait_time = 5.0
 autostart = true
 
 [node name="Target" type="Node2D" parent="."]
-position = Vector2(1000, 0)
+position = Vector2(1100, 0)
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

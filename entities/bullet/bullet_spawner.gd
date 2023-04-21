@@ -5,6 +5,9 @@ var bullet_scene = preload("res://entities/bullet/bullet.tscn")
 
 @onready var world = get_tree().get_first_node_in_group("world")
 
+func _ready():
+	$Timer.wait_time = 4 + randf() * 4
+
 func _on_timer_timeout():
 	var bullet = bullet_scene.instantiate()
 	bullet.modulate = Color.RED if type == "red" else Color.BLUE

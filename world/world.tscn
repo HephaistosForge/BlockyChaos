@@ -548,6 +548,7 @@ replication_config = SubResource("SceneReplicationConfig_oorh6")
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_ftcl4")
+volume_db = -30.0
 autoplay = true
 
 [connection signal="animation_finished" from="IntroScreen/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

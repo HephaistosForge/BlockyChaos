@@ -84,6 +84,10 @@ func start_game():
 	add_random_traps(12, "blue")
 	add_random_bullet_spawner("red")
 	add_random_bullet_spawner("blue")
+	add_random_bullet_spawner("red")
+	add_random_bullet_spawner("blue")
+	add_random_bullet_spawner("red")
+	add_random_bullet_spawner("blue")
 	for player in get_tree().get_nodes_in_group("players"):
 		# print("goal at ", player.position)
 		var goal = goal_scene.instantiate()
