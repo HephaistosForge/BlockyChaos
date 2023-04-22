@@ -8,11 +8,9 @@ var box_size = 100
 var line_width = 8
 var line_color = Color(.1, .1, .1, 1)
 
-# Number starting at 1, at 2 bullets start. 
-# Each completed level increases difficulty by one
-# Number of bulletspawners is (difficulty - 1)
-# Number of traps is 8 + difficulty per player color
-var difficulty = 2
+
+# @export var game_has_started = false
+var difficulty
 
 var trap_scene = preload("res://entities/trap/trap.tscn")
 var tile_scene = preload("res://world/tile/tile.tscn")
@@ -76,18 +74,31 @@ func add_random_bullet_spawner(type: String):
 	# trap.visible = local_player == "red"
 	bullet_spawner.type = type
 	add_child(bullet_spawner, true)
+	
 
+func add_random_bullet_spawners(count: int, type: String):
+	for i in count:
+		add_random_bullet_spawner(type)
+
+func _set_difficulty(difficulty):
+	self.difficulty = difficulty
+	for color in ["red", "blue"]:
+		add_random_traps(difficulty.traps, color)
+		add_random_bullet_spawners(difficulty.bullets, color)
+	
+	$Waiting.visible = false
+	# var game_has_started = true
+	set_game_paused(false)
+	
+	# Call deferred is important here because otherwise godot does not have enough
+	# time to sync traps with the other player
+	call_deferred("rpc", "sync_traps")
 
 func start_game():
-	$Waiting.visible = false
-	add_random_traps(12, "red")
-	add_random_traps(12, "blue")
-	add_random_bullet_spawner("red")
-	add_random_bullet_spawner("blue")
-	add_random_bullet_spawner("red")
-	add_random_bullet_spawner("blue")
-	add_random_bullet_spawner("red")
-	add_random_bullet_spawner("blue")
+	
+	set_game_paused(true)
+	$DifficultyDialog.visible = true
+	
 	for player in get_tree().get_nodes_in_group("players"):
 		# print("goal at ", player.position)
 		var goal = goal_scene.instantiate()
@@ -108,10 +119,7 @@ func start_game():
 			var tile = tile_scene.instantiate()
 			add_child(tile, true)
 			tile.position = tile_to_world_coord(Vector2(x, y))
-	
-	# Call deferred is important here because otherwise godot does not have enough
-	# time to sync traps with the other player
-	call_deferred("rpc", "sync_traps")
+
 
 
 func local_player_type():

@@ -1,5 +1,7 @@
 extends PanelContainer
 
+signal difficulty_clicked(difficulty)
+
 @onready var main_menu = get_parent().get_node("Menu")
 
 class Difficulty:
@@ -24,12 +26,18 @@ var difficulties = [
 	Difficulty.new(14, 4, true),
 ]
 
+func _difficulty_clicked(difficulty):
+	visible = false
+	emit_signal("difficulty_clicked", difficulty)
+	
+
 func _ready():
 	if difficulty_hbox_container != null:
 		for difficulty in difficulties:
 			var difficulty_button = difficulty_button_scene.instantiate()
 			difficulty_button.set_difficulty(difficulty)
 			difficulty_hbox_container.add_child(difficulty_button)
+			difficulty_button.connect("difficulty_clicked", _difficulty_clicked)
 
 func _on_back_button_pressed() -> void:
 	main_menu.visible = true

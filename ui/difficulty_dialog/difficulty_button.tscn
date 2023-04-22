@@ -4,16 +4,20 @@
 [ext_resource type="Texture2D" uid="uid://cr18jbgjf2df7" path="res://entities/trap/Sawblade.png" id="1_sfcea"]
 [ext_resource type="Texture2D" uid="uid://byack20pobxh3" path="res://entities/bullet/bullet.png" id="2_knjej"]
 
-[node name="DifficultyButton" type="PanelContainer" node_paths=PackedStringArray("trap_label", "bullet_label")]
+[node name="DifficultyButton" type="PanelContainer" node_paths=PackedStringArray("trap_label", "trap_image", "bullet_label", "bullet_image")]
 offset_right = 143.0
 offset_bottom = 162.0
 pivot_offset = Vector2(74, 82)
+mouse_default_cursor_shape = 2
 script = ExtResource("1_fd3nu")
 trap_label = NodePath("VBoxContainer/TrapContainer/MarginContainer/Label")
+trap_image = NodePath("VBoxContainer/TrapContainer/Image")
 bullet_label = NodePath("VBoxContainer/BulletContainer/MarginContainer2/Label")
+bullet_image = NodePath("VBoxContainer/BulletContainer/Image")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="TrapContainer" type="HBoxContainer" parent="VBoxContainer"]
 layout_mode = 2
@@ -58,5 +62,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 40
 text = "1"
 
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

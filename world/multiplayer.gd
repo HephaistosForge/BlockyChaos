@@ -107,3 +107,4 @@ func _on_server_disconnected():
 
 func _on_exit():
 	get_tree().quit()
+

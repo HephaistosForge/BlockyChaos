@@ -67,7 +67,7 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:modulate")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.6, 1.8, 2.3),
@@ -79,7 +79,7 @@ tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("ColorRect:modulate")
-tracks/1/interp = 1
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(2.5, 3),
@@ -91,7 +91,7 @@ tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath("Sprite2D:scale")
-tracks/2/interp = 1
+tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 2.3),
@@ -290,17 +290,23 @@ properties/2/sync = true
 properties/3/path = NodePath("MenuBackground:visible")
 properties/3/spawn = true
 properties/3/sync = true
+properties/4/path = NodePath(".:is_game_paused")
+properties/4/spawn = true
+properties/4/sync = true
 
 [node name="World" type="Node2D" groups=["world"]]
 script = ExtResource("1_nu8f6")
 
-[node name="IntroScreen" type="Node2D" parent="."]
+[node name="IntroScreen" type="Control" parent="."]
 visible = false
 z_index = 5
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("2_u65gl")
 
 [node name="ColorRect" type="ColorRect" parent="IntroScreen"]
 custom_minimum_size = Vector2(1600, 1600)
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -573,6 +579,7 @@ volume_db = -10.0
 autoplay = true
 bus = &"Music"
 
+[connection signal="gui_input" from="IntroScreen/ColorRect" to="IntroScreen" method="_on_color_rect_gui_input"]
 [connection signal="animation_finished" from="IntroScreen/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="button_down" from="BigFloatingMessageContainer/Restart" to="BigFloatingMessageContainer/Restart" method="_on_button_down"]
 [connection signal="pressed" from="Menu/HowToPlay" to="HowToPlayDialog" method="_on_how_to_play_pressed"]
@@ -582,3 +589,4 @@ bus = &"Music"
 [connection signal="button_up" from="Menu/Exit" to="Multiplayer" method="_on_exit"]
 [connection signal="pressed" from="ConnectionDialog/MarginContainer/HBoxContainer/MarginContainer/BackButton" to="ConnectionDialog" method="_on_back_button_pressed"]
 [connection signal="button_up" from="ConnectionDialog/MarginContainer/HBoxContainer/VBoxContainer/Join" to="Multiplayer" method="on_join"]
+[connection signal="difficulty_clicked" from="DifficultyDialog" to="." method="_set_difficulty"]
