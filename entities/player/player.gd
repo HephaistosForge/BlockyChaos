@@ -150,9 +150,9 @@ func _input(event):
 		var lefteye = $Body/LeftEye.get_global_position()
 		var righteye = $Body/RightEye.get_global_position()
 		$Body/LeftEye/LeftEyePupil.set_global_position(lefteye + \
-			(event.position - Vector2(get_viewport().size.x / 2, get_viewport().size.y / 2) - lefteye).normalized() * 4)
+			(event.global_position - Vector2(get_viewport().size.x / 2, get_viewport().size.y / 2) - lefteye).normalized() * 4)
 		$Body/RightEye/RightEyePupil.set_global_position(righteye + \
-			(event.position - Vector2(get_viewport().size.x / 2, get_viewport().size.y / 2) - righteye).normalized() * 4)
+			(event.global_position - Vector2(get_viewport().size.x / 2, get_viewport().size.y / 2) - righteye).normalized() * 4)
 	if event.is_action_pressed("back_to_menu") and is_multiplayer_authority():
 		show_back_to_menu_dialog()
 

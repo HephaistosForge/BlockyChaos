@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://c48wvhcpnqhb1"]
+[gd_scene load_steps=31 format=3 uid="uid://c48wvhcpnqhb1"]
 
 [ext_resource type="Script" path="res://world/world.gd" id="1_nu8f6"]
 [ext_resource type="Script" path="res://world/floor.gd" id="1_qsj2w"]
@@ -18,6 +18,8 @@
 [ext_resource type="Theme" uid="uid://dp58tqgvn7o0e" path="res://world/default_theme.tres" id="8_djg35"]
 [ext_resource type="Script" path="res://world/Connection Dialog.gd" id="13_3bi47"]
 [ext_resource type="PackedScene" uid="uid://s213jx5eke4u" path="res://ui/how_to_play_dialog/how_to_play_dialog.tscn" id="16_panuv"]
+[ext_resource type="PackedScene" uid="uid://hj667vw3w172" path="res://ui/settings/settings.tscn" id="17_rpdj3"]
+[ext_resource type="PackedScene" uid="uid://1x06g2vmufkn" path="res://ui/difficulty_dialog/difficulty_dialog.tscn" id="18_x41xh"]
 
 [sub_resource type="Animation" id="Animation_jkl6r"]
 length = 0.001
@@ -187,11 +189,11 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("MenuPlayerRed:rotation")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"transitions": PackedFloat32Array(0.812253, 0.812253),
 "update": 0,
 "values": [0.282743, -0.282743]
 }
@@ -199,11 +201,11 @@ tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("MenuPlayerRed:position")
-tracks/1/interp = 1
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"transitions": PackedFloat32Array(0.812253, 0.812253),
 "update": 0,
 "values": [Vector2(-400, 1), Vector2(-395, 1)]
 }
@@ -211,11 +213,11 @@ tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath("MenuPlayerRed:scale")
-tracks/2/interp = 1
+tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"transitions": PackedFloat32Array(0.812253, 0.812253),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(0.75, 0.75)]
 }
@@ -223,11 +225,11 @@ tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
 tracks/3/path = NodePath("MenuPlayerBlue:rotation")
-tracks/3/interp = 1
+tracks/3/interp = 2
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"transitions": PackedFloat32Array(0.784584, 0.784584),
 "update": 0,
 "values": [-0.282743, 0.282743]
 }
@@ -235,11 +237,11 @@ tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
 tracks/4/path = NodePath("MenuPlayerBlue:position")
-tracks/4/interp = 1
+tracks/4/interp = 2
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"transitions": PackedFloat32Array(0.784584, 0.784584),
 "update": 0,
 "values": [Vector2(205, 398), Vector2(205, 398)]
 }
@@ -247,11 +249,11 @@ tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/path = NodePath("MenuPlayerBlue:scale")
-tracks/5/interp = 1
+tracks/5/interp = 2
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
+"transitions": PackedFloat32Array(0.784584, 0.784584),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(0.75, 0.75)]
 }
@@ -293,6 +295,7 @@ properties/3/sync = true
 script = ExtResource("1_nu8f6")
 
 [node name="IntroScreen" type="Node2D" parent="."]
+visible = false
 z_index = 5
 script = ExtResource("2_u65gl")
 
@@ -429,7 +432,11 @@ offset_bottom = 287.0
 size_flags_horizontal = 3
 size_flags_vertical = 4
 theme = ExtResource("8_djg35")
-theme_override_constants/separation = 60
+theme_override_constants/separation = 40
+
+[node name="HowToPlay" type="Button" parent="Menu"]
+layout_mode = 2
+text = "How To Play"
 
 [node name="Host" type="Button" parent="Menu"]
 layout_mode = 2
@@ -440,9 +447,9 @@ text = "Host "
 layout_mode = 2
 text = "Join "
 
-[node name="HowToPlay" type="Button" parent="Menu"]
+[node name="Settings" type="Button" parent="Menu"]
 layout_mode = 2
-text = "How To Play"
+text = "Settings"
 
 [node name="Exit" type="Button" parent="Menu"]
 layout_mode = 2
@@ -531,6 +538,20 @@ offset_top = -133.0
 offset_right = 351.0
 offset_bottom = 331.0
 
+[node name="SettingsDialog" parent="." instance=ExtResource("17_rpdj3")]
+visible = false
+offset_left = -161.5
+offset_top = -23.5
+offset_right = 165.5
+offset_bottom = 221.5
+
+[node name="DifficultyDialog" parent="." instance=ExtResource("18_x41xh")]
+visible = false
+offset_left = -331.0
+offset_top = -7.5
+offset_right = 335.0
+offset_bottom = 205.5
+
 [node name="Camera" type="Camera2D" parent="."]
 
 [node name="Multiplayer" type="Node" parent="."]
@@ -548,14 +569,16 @@ replication_config = SubResource("SceneReplicationConfig_oorh6")
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_ftcl4")
-volume_db = -30.0
+volume_db = -10.0
 autoplay = true
+bus = &"Music"
 
 [connection signal="animation_finished" from="IntroScreen/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="button_down" from="BigFloatingMessageContainer/Restart" to="BigFloatingMessageContainer/Restart" method="_on_button_down"]
+[connection signal="pressed" from="Menu/HowToPlay" to="HowToPlayDialog" method="_on_how_to_play_pressed"]
 [connection signal="button_up" from="Menu/Host" to="Multiplayer" method="on_host"]
 [connection signal="pressed" from="Menu/Join" to="ConnectionDialog" method="_on_join_pressed"]
-[connection signal="pressed" from="Menu/HowToPlay" to="HowToPlayDialog" method="_on_how_to_play_pressed"]
+[connection signal="pressed" from="Menu/Settings" to="SettingsDialog" method="_on_settings_pressed"]
 [connection signal="button_up" from="Menu/Exit" to="Multiplayer" method="_on_exit"]
 [connection signal="pressed" from="ConnectionDialog/MarginContainer/HBoxContainer/MarginContainer/BackButton" to="ConnectionDialog" method="_on_back_button_pressed"]
 [connection signal="button_up" from="ConnectionDialog/MarginContainer/HBoxContainer/VBoxContainer/Join" to="Multiplayer" method="on_join"]

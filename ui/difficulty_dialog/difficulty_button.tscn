@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=3 uid="uid://dheyw2mpfn25m"]
+
+[ext_resource type="Script" path="res://ui/difficulty_dialog/difficulty_button.gd" id="1_fd3nu"]
+[ext_resource type="Texture2D" uid="uid://cr18jbgjf2df7" path="res://entities/trap/Sawblade.png" id="1_sfcea"]
+[ext_resource type="Texture2D" uid="uid://byack20pobxh3" path="res://entities/bullet/bullet.png" id="2_knjej"]
+
+[node name="DifficultyButton" type="PanelContainer" node_paths=PackedStringArray("trap_label", "bullet_label")]
+offset_right = 143.0
+offset_bottom = 162.0
+pivot_offset = Vector2(74, 82)
+script = ExtResource("1_fd3nu")
+trap_label = NodePath("VBoxContainer/TrapContainer/MarginContainer/Label")
+bullet_label = NodePath("VBoxContainer/BulletContainer/MarginContainer2/Label")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="TrapContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Image" type="TextureRect" parent="VBoxContainer/TrapContainer"]
+modulate = Color(1, 0, 0, 1)
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+texture = ExtResource("1_sfcea")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/TrapContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 20
+
+[node name="Label" type="Label" parent="VBoxContainer/TrapContainer/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "8
+"
+
+[node name="BulletContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Image" type="TextureRect" parent="VBoxContainer/BulletContainer"]
+modulate = Color(1, 0, 0, 1)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+texture = ExtResource("2_knjej")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="MarginContainer2" type="MarginContainer" parent="VBoxContainer/BulletContainer"]
+layout_mode = 2
+theme_override_constants/margin_right = 20
+
+[node name="Label" type="Label" parent="VBoxContainer/BulletContainer/MarginContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "1"
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -1,4 +1,7 @@
-[gd_resource type="Theme" format=3 uid="uid://dp58tqgvn7o0e"]
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://dp58tqgvn7o0e"]
+
+[ext_resource type="FontFile" uid="uid://x5t7n52vw6b" path="res://ui/fonts/Sigmar/Sigmar-Regular.ttf" id="1_6rp4k"]
 
 [resource]
+default_font = ExtResource("1_6rp4k")
 Button/font_sizes/font_size = 30

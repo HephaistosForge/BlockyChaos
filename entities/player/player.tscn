@@ -81,10 +81,12 @@ texture = ExtResource("5_2gsgv")
 
 [node name="AudioWrong" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("6_yek66")
+bus = &"Sounds"
 
 [node name="AudioMove" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_aqrrm")
 max_polyphony = 3
+bus = &"Sounds"
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_7i3tb")
