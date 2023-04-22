@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cxbevqdrw48ny" path="res://particle_effects/bullet/bullet.tscn" id="3_1fbpg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hdqp4"]
-radius = 42.107
+radius = 9.48683
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_m5633"]
 properties/0/path = NodePath(".:type")

@@ -1,4 +1,4 @@
-extends Node
+extends Node2D
 
 const GAME_OVER_TEXT: String = "Game Over!"
 const WINNING_TEXT: String = "You both won!"
@@ -15,3 +15,14 @@ func display_big_floating_message(text: String) -> void:
 
 func hide_big_floating_message() -> void:
 	big_floating_messager_container.visible = false
+
+func look_with_pupil_at_mouse(eye):
+	var pupil = eye.get_node(eye.name + "Pupil")
+	var mouse_pos = get_global_mouse_position()
+	var eye_pos = eye.get_global_position()
+	var squint_factor = 1
+	
+	var direction = (mouse_pos - eye_pos) / squint_factor
+	if direction.length() > 70:
+		direction = direction.normalized() * 70
+	pupil.global_position = eye.global_position + direction * pupil.global_scale

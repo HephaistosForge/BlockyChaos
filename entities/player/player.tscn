@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://2qhapug04qh1"]
+[gd_scene load_steps=11 format=3 uid="uid://2qhapug04qh1"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_3yqfr"]
 [ext_resource type="Texture2D" uid="uid://ciqvshb2x1uxb" path="res://entities/player/sprites/Body.png" id="2_rh600"]
@@ -35,18 +35,9 @@ properties/6/path = NodePath("death:emitting")
 properties/6/spawn = true
 properties/6/sync = true
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_k6uk4"]
-radius = 4.0
-
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 19
 script = ExtResource("1_3yqfr")
-
-[node name="CollisionShape2D2" type="CollisionPolygon2D" parent="."]
-position = Vector2(-19, -12)
-scale = Vector2(0.25, 0.25)
-polygon = PackedVector2Array(-20, -32, 4, -36, 28, -28, 36, -8, 36, 12, 24, 32, 0, 40, -24, 28, -36, 8, -32, -16, -20, -32, -144, -248, -268, 64, -176, 264, 280, 236, 272, -148, -144, -248)
-disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-0.5, 0)
@@ -90,14 +81,5 @@ bus = &"Sounds"
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_7i3tb")
-
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
-position = Vector2(-19, -12)
-collision_layer = 16
-gravity_scale = 0.0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
-shape = SubResource("CircleShape2D_k6uk4")
-disabled = true
 
 [node name="death" parent="." instance=ExtResource("8_q2rcd")]

@@ -145,19 +145,12 @@ func restart() -> void:
 	rpc("hide_big_floating_message")
 	
 
-#func look_with_pupil_at_mouse(event, eye, pupil):
-#	pupil.position = 
+func _process(_delta):
+	if visible and is_multiplayer_authority():
+		Globals.look_with_pupil_at_mouse($Body/LeftEye)
+		Globals.look_with_pupil_at_mouse($Body/RightEye)
 
 func _input(event):
-	if event is InputEventMouseMotion and is_multiplayer_authority():
-		var lefteye = $Body/LeftEye.get_global_position()
-		var righteye = $Body/RightEye.get_global_position()
-		var mouse = event.position
-		$Body/LeftEye/LeftEyePupil.position = (mouse - lefteye).normalized() * 4
-		#$Body/LeftEye/LeftEyePupil.set_global_position(lefteye + \
-		#	(event.global_position - Vector2(get_viewport().size.x / 2, get_viewport().size.y / 2) - lefteye).normalized() * 4)
-		#$Body/RightEye/RightEyePupil.set_global_position(righteye + \
-		#	(event.global_position - Vector2(get_viewport().size.x / 2, get_viewport().size.y / 2) - righteye).normalized() * 4)
 	if event.is_action_pressed("back_to_menu") and is_multiplayer_authority():
 		show_back_to_menu_dialog()
 
