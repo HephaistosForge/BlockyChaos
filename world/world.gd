@@ -82,6 +82,15 @@ func add_random_bullet_spawners(count: int, type: String):
 
 func _set_difficulty(difficulty):
 	self.difficulty = difficulty
+	
+	
+	for node in get_tree().get_nodes_in_group("trap"):
+		node.queue_free()
+	for node in get_tree().get_nodes_in_group("bullet_spawner"):
+		node.queue_free()
+	for node in get_tree().get_nodes_in_group("bullet"):
+		node.queue_free()
+	
 	for color in ["red", "blue"]:
 		add_random_traps(difficulty.traps, color)
 		add_random_bullet_spawners(difficulty.bullets, color)

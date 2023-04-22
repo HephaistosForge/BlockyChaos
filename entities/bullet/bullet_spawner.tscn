@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://entities/bullet/bullet_spawner.gd" id="1_cbopw"]
 
-[node name="BulletSpawner" type="Node2D"]
+[node name="BulletSpawner" type="Node2D" groups=["bullet_spawner"]]
 script = ExtResource("1_cbopw")
 
 [node name="Timer" type="Timer" parent="."]

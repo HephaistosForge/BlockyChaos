@@ -65,7 +65,8 @@ layout_mode = 2
 clip_contents = false
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-text = "You control one of the Blocks, your partner controls the other one. "
+bbcode_enabled = true
+text = "You control one of the Blocks with [color=red]WASD[/color] or [color=red]←↑↓→[/color], your partner controls the other one. You should communicate with your partner in order to coordinate movements."
 fit_content = true
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
@@ -92,7 +93,8 @@ layout_mode = 2
 clip_contents = false
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-text = "Avoid getting hit by traps and other hazards, but beware - only together with your partner you will be able to discover the whole truth."
+bbcode_enabled = true
+text = "Avoid moving into [color=red]traps[/color] or [color=red]bullets[/color], but beware - you only see [color=red]half[/color] of the traps and bullets, your partner sees the rest of them. Communicate to find all traps!"
 fit_content = true
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
@@ -119,7 +121,8 @@ layout_mode = 2
 clip_contents = false
 custom_minimum_size = Vector2(400, 0)
 layout_mode = 2
-text = "Both of you need to reach the goal corresponding to your respective color and you will win!"
+bbcode_enabled = true
+text = "Both of you need to reach the [color=red]goal[/color] corresponding to your respective color and you will win!"
 fit_content = true
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/Button" to="." method="_on_back_button_pressed"]

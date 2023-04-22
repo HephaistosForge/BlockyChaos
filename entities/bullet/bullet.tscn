@@ -24,7 +24,7 @@ properties/4/path = NodePath(".:modulate")
 properties/4/spawn = true
 properties/4/sync = false
 
-[node name="Bullet" type="Area2D"]
+[node name="Bullet" type="Area2D" groups=["bullet"]]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_lj808")

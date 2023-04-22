@@ -402,12 +402,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -152.0
+offset_left = -281.5
 offset_top = -116.0
-offset_right = 148.0
+offset_right = 277.5
 offset_bottom = 57.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(284.5, 101)
+theme = ExtResource("8_djg35")
 theme_override_constants/separation = 40
 alignment = 1
 script = ExtResource("5_f3boa")
@@ -415,13 +417,14 @@ script = ExtResource("5_f3boa")
 [node name="BigFloatingMessage" type="Label" parent="BigFloatingMessageContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "_"
+text = "Game over"
 label_settings = SubResource("LabelSettings_bkkiv")
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("5_kpq7d")
 
 [node name="Restart" type="Button" parent="BigFloatingMessageContainer"]
+visible = false
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
 size_flags_horizontal = 4
