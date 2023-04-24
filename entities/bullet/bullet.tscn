@@ -41,6 +41,5 @@ replication_config = SubResource("SceneReplicationConfig_m5633")
 
 [node name="bullet" parent="." instance=ExtResource("3_1fbpg")]
 z_index = -1
-position = Vector2(-4, 0)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

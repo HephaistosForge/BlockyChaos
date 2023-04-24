@@ -6,7 +6,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5n02x"]
 bg_color = Color(0.121569, 0.121569, 0.121569, 1)
 
-[node name="DifficultyDialog" type="PanelContainer" node_paths=PackedStringArray("difficulty_hbox_container")]
+[node name="DifficultyDialog" type="PanelContainer" node_paths=PackedStringArray("difficulty_vbox_container")]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -19,7 +19,7 @@ grow_vertical = 2
 theme = ExtResource("1_adwmd")
 theme_override_styles/panel = SubResource("StyleBoxFlat_5n02x")
 script = ExtResource("2_lf0i5")
-difficulty_hbox_container = NodePath("MarginContainer/HBoxContainer/VBoxContainer/DifficultyContainer")
+difficulty_vbox_container = NodePath("MarginContainer/HBoxContainer/VBoxContainer")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -31,6 +31,7 @@ theme_override_constants/margin_bottom = 20
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 20
+alignment = 1
 
 [node name="Button" type="Button" parent="MarginContainer/HBoxContainer"]
 visible = false
@@ -48,8 +49,5 @@ theme_override_constants/separation = 0
 layout_mode = 2
 theme_override_font_sizes/font_size = 60
 text = "Choose Difficulty"
-
-[node name="DifficultyContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/Button" to="." method="_on_back_button_pressed"]

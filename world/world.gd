@@ -20,6 +20,21 @@ var goal_scene = preload("res://entities/goal/goal.tscn")
 
 var local_player
 
+var possible_bullet_spawner_locations = []
+
+func _ready():
+	calculate_possible_bullet_spawner_locations()
+
+func calculate_possible_bullet_spawner_locations():
+	for y in range(1, map_size.y-2):
+		possible_bullet_spawner_locations.append([Vector2(-1, y), 0])
+		possible_bullet_spawner_locations.append([Vector2(map_size.x, y), PI])
+	for x in range(1, map_size.x-2):
+		possible_bullet_spawner_locations.append([Vector2(x, -1), PI/2])
+		possible_bullet_spawner_locations.append([Vector2(x, map_size.y), PI+PI/2])
+		
+func random_choice(arr):
+	return arr[randi() % arr.size()]
 
 func add_temp_trap(at_tile: Vector2, type: String):
 	var trap = trap_scene.instantiate()
@@ -67,9 +82,10 @@ func add_random_traps(number: int, type: String):
 func add_random_bullet_spawner(type: String):
 	var bullet_spawner = bullet_spawner_scene.instantiate()
 	# trap = $Spawner.spawn(trap_scene)
-	var at_tile = Vector2(-1, randi_range(1, map_size.y-2))
-	var at_pos = tile_to_world_coord(at_tile)
+	var at_tile_and_rotation = random_choice(possible_bullet_spawner_locations)
+	var at_pos = tile_to_world_coord(at_tile_and_rotation[0])
 	bullet_spawner.position = at_pos
+	bullet_spawner.rotation = at_tile_and_rotation[1]
 	# trap.modulate = Color.RED if type == "red" else Color.BLUE
 	# trap.visible = local_player == "red"
 	bullet_spawner.type = type
@@ -80,8 +96,8 @@ func add_random_bullet_spawners(count: int, type: String):
 	for i in count:
 		add_random_bullet_spawner(type)
 
-func _set_difficulty(difficulty):
-	self.difficulty = difficulty
+func _set_difficulty(_difficulty):
+	self.difficulty = _difficulty
 	
 	
 	for node in get_tree().get_nodes_in_group("trap"):

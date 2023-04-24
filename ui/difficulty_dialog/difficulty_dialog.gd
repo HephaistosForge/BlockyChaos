@@ -5,10 +5,10 @@ signal difficulty_clicked(difficulty)
 @onready var main_menu = get_parent().get_node("Menu")
 
 class Difficulty:
-	func _init(traps, bullets, bullets_can_spawn_on_player_row=false):
-		self.traps = traps
-		self.bullets = bullets
-		self.bullets_can_spawn_on_player_row = bullets_can_spawn_on_player_row
+	func _init(_traps, _bullets, _bullets_can_spawn_on_player_row=false):
+		self.traps = _traps
+		self.bullets = _bullets
+		self.bullets_can_spawn_on_player_row = _bullets_can_spawn_on_player_row
 	
 	var traps: int
 	var bullets: int
@@ -16,14 +16,18 @@ class Difficulty:
 
 
 var difficulty_button_scene = preload("res://ui/difficulty_dialog/difficulty_button.tscn")
-@export var difficulty_hbox_container: Node
+
+@export var difficulty_vbox_container: Node
 
 var difficulties = [
 	Difficulty.new(6, 0),
 	Difficulty.new(8, 1),
 	Difficulty.new(10, 2),
 	Difficulty.new(12, 3, true),
-	Difficulty.new(14, 4, true),
+	Difficulty.new(14, 5, true),
+	Difficulty.new(16, 7, true),
+	Difficulty.new(20, 10, true),
+	Difficulty.new(10, 20, true),
 ]
 
 func _difficulty_clicked(difficulty):
@@ -32,12 +36,16 @@ func _difficulty_clicked(difficulty):
 	
 
 func _ready():
-	if difficulty_hbox_container != null:
-		for difficulty in difficulties:
-			var difficulty_button = difficulty_button_scene.instantiate()
-			difficulty_button.set_difficulty(difficulty)
-			difficulty_hbox_container.add_child(difficulty_button)
-			difficulty_button.connect("difficulty_clicked", _difficulty_clicked)
+	var difficulty_hbox_container
+	for i in difficulties.size():
+		if i % 4 == 0:
+			difficulty_hbox_container = HBoxContainer.new()
+			difficulty_vbox_container.add_child(difficulty_hbox_container)
+		var difficulty = difficulties[i]
+		var difficulty_button = difficulty_button_scene.instantiate()
+		difficulty_button.set_difficulty(difficulty, i+1)
+		difficulty_hbox_container.add_child(difficulty_button)
+		difficulty_button.connect("difficulty_clicked", _difficulty_clicked)
 
 func _on_back_button_pressed() -> void:
 	main_menu.visible = true
