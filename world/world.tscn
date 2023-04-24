@@ -1,16 +1,12 @@
-[gd_scene load_steps=26 format=3 uid="uid://de3s6l2peruyr"]
+[gd_scene load_steps=18 format=3 uid="uid://de3s6l2peruyr"]
 
 [ext_resource type="Script" path="res://world/world.gd" id="1_nu8f6"]
 [ext_resource type="Script" path="res://world/floor.gd" id="1_qsj2w"]
+[ext_resource type="PackedScene" uid="uid://dyteh5svm3sbi" path="res://ui/menu/menu_background.tscn" id="2_akp5v"]
 [ext_resource type="Script" path="res://world/multiplayer.gd" id="2_c2arv"]
-[ext_resource type="Script" path="res://ui/menu/menu_floor.gd" id="2_xqiec"]
-[ext_resource type="Script" path="res://world/loading_spinner.gd" id="4_6jm1b"]
-[ext_resource type="Texture2D" uid="uid://bxhkhlyrnedka" path="res://ui/menu/blocky.png" id="4_b0rf0"]
-[ext_resource type="PackedScene" uid="uid://bmd3e8ptyq8vn" path="res://entities/menu_player/menu_player.tscn" id="4_l7k3v"]
 [ext_resource type="Script" path="res://world/big_floating_message_container.gd" id="5_f3boa"]
 [ext_resource type="Script" path="res://world/gameover.gd" id="5_kpq7d"]
-[ext_resource type="Texture2D" uid="uid://2c77w257aian" path="res://ui/menu/chaos.png" id="5_wpdls"]
-[ext_resource type="Texture2D" uid="uid://ciyu1yyim3ms4" path="res://world/loading_icon.png" id="7_6eblg"]
+[ext_resource type="PackedScene" uid="uid://jloc5scb64ec" path="res://ui/loading_dialog/loading_dialog.tscn" id="7_1bxb2"]
 [ext_resource type="Script" path="res://world/restart.gd" id="7_v7vsj"]
 [ext_resource type="Theme" uid="uid://dp58tqgvn7o0e" path="res://ui/theme.tres" id="9_54h2v"]
 [ext_resource type="PackedScene" uid="uid://c17ktta1s2to7" path="res://ui/connection_dialog/connection_dialog.tscn" id="13_yffd8"]
@@ -18,171 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://83o7d5xjb155" path="res://ui/settings_dialog/settings.tscn" id="17_rpdj3"]
 [ext_resource type="AudioStream" uid="uid://dkphkpim1ixa5" path="res://audio/music/background.mp3" id="18_jjlqk"]
 [ext_resource type="PackedScene" uid="uid://cw8tswel1ykl7" path="res://ui/difficulty_dialog/difficulty_dialog.tscn" id="18_x41xh"]
-
-[sub_resource type="Animation" id="Animation_lk0en"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MenuPlayerRed:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.282743]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MenuPlayerRed:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-400, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("MenuPlayerRed:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("MenuPlayerBlue:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(199, 398)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("MenuPlayerBlue:rotation")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("MenuPlayerBlue:scale")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_cmqal"]
-resource_name = "bouncing"
-length = 2.0
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("MenuPlayerRed:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.812253, 0.812253),
-"update": 0,
-"values": [0.282743, -0.282743]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("MenuPlayerRed:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.812253, 0.812253),
-"update": 0,
-"values": [Vector2(-400, 1), Vector2(-395, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("MenuPlayerRed:scale")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.812253, 0.812253),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0.75, 0.75)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("MenuPlayerBlue:rotation")
-tracks/3/interp = 2
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.784584, 0.784584),
-"update": 0,
-"values": [-0.282743, 0.282743]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("MenuPlayerBlue:position")
-tracks/4/interp = 2
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.784584, 0.784584),
-"update": 0,
-"values": [Vector2(205, 398), Vector2(205, 398)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("MenuPlayerBlue:scale")
-tracks/5/interp = 2
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(0.784584, 0.784584),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0.75, 0.75)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_a8210"]
-_data = {
-"RESET": SubResource("Animation_lk0en"),
-"bouncing": SubResource("Animation_cmqal")
-}
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j5pu1"]
-bg_color = Color(0.6, 0.6, 0.6, 0.831373)
-corner_radius_top_left = 25
-corner_radius_top_right = 25
-corner_radius_bottom_right = 25
-corner_radius_bottom_left = 25
 
 [sub_resource type="LabelSettings" id="LabelSettings_bkkiv"]
 font_size = 99
@@ -210,74 +41,15 @@ properties/4/sync = true
 [node name="World" type="Node2D" groups=["world"]]
 script = ExtResource("1_nu8f6")
 
-[node name="MenuBackground" type="Node2D" parent="."]
-
-[node name="MenuFloor" type="Sprite2D" parent="MenuBackground"]
-centered = false
-script = ExtResource("2_xqiec")
-
-[node name="MenuPlayerRed" parent="MenuBackground" instance=ExtResource("4_l7k3v")]
-position = Vector2(-400, 1)
-rotation = 0.282743
-
-[node name="MenuPlayerBlue" parent="MenuBackground" instance=ExtResource("4_l7k3v")]
-position = Vector2(199, 398)
-color = Color(0, 0, 1, 1)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="MenuBackground"]
-autoplay = "bouncing"
-libraries = {
-"": SubResource("AnimationLibrary_a8210")
-}
-
-[node name="LogoBackground" type="PanelContainer" parent="MenuBackground"]
-offset_left = -350.0
-offset_top = -437.0
-offset_right = 354.0
-offset_bottom = -161.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_j5pu1")
-
-[node name="Blocky" type="Sprite2D" parent="MenuBackground"]
-position = Vector2(-104, -364)
-scale = Vector2(0.275, 0.275)
-texture = ExtResource("4_b0rf0")
-
-[node name="Chaos" type="Sprite2D" parent="MenuBackground"]
-position = Vector2(141, -236)
-scale = Vector2(0.275, 0.275)
-texture = ExtResource("5_wpdls")
+[node name="MenuBackground" parent="." instance=ExtResource("2_akp5v")]
 
 [node name="Floor" type="Sprite2D" parent="."]
 visible = false
 centered = false
 script = ExtResource("1_qsj2w")
 
-[node name="Waiting" type="VBoxContainer" parent="."]
-visible = false
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -500.0
-offset_top = -500.0
-offset_right = 500.0
-offset_bottom = 500.0
-grow_horizontal = 2
-grow_vertical = 2
-pivot_offset = Vector2(500, 515)
-alignment = 1
-
-[node name="Waiting" type="Label" parent="Waiting"]
-layout_mode = 2
-text = "Waiting for other player"
-horizontal_alignment = 1
-
-[node name="Sprite2D" type="Sprite2D" parent="Waiting"]
-position = Vector2(500, 575)
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("7_6eblg")
-script = ExtResource("4_6jm1b")
+[node name="Waiting" parent="." instance=ExtResource("7_1bxb2")]
+theme = ExtResource("9_54h2v")
 
 [node name="BigFloatingMessageContainer" type="VBoxContainer" parent="."]
 visible = false

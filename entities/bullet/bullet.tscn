@@ -1,8 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://c1lfbitfwefcv"]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://entities/bullet/bullet.gd" id="1_lj808"]
 [ext_resource type="Texture2D" uid="uid://byack20pobxh3" path="res://entities/bullet/bullet.png" id="1_ms6q5"]
-[ext_resource type="PackedScene" uid="uid://cxbevqdrw48ny" path="res://particle_effects/bullet/bullet.tscn" id="3_1fbpg"]
+[ext_resource type="PackedScene" uid="uid://dofvk3xff5b51" path="res://entities/bullet/particles/bullet_particles.tscn" id="3_1fbpg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hdqp4"]
 radius = 9.48683

@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://djwmvaawq32y"]
+
+[ext_resource type="Material" uid="uid://dtgj8fteofd0n" path="res://entities/bullet/particles/bullet_particles.tres" id="1_t06vd"]
+[ext_resource type="Texture2D" uid="uid://dap1fwldbjh2l" path="res://entities/bullet/particles/circle_particle.png" id="2_i31oa"]
+
+[node name="BulletParticles" type="GPUParticles2D"]
+amount = 20
+process_material = ExtResource("1_t06vd")
+texture = ExtResource("2_i31oa")
+trail_sections = 2
+trail_section_subdivisions = 8

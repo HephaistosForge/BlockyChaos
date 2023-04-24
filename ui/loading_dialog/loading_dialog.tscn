@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=3 uid="uid://jloc5scb64ec"]
+
+[ext_resource type="Texture2D" uid="uid://ciyu1yyim3ms4" path="res://ui/loading_dialog/loading_icon.png" id="1_n8ggv"]
+[ext_resource type="Theme" uid="uid://dp58tqgvn7o0e" path="res://ui/theme.tres" id="1_wuh5k"]
+[ext_resource type="Script" path="res://ui/loading_dialog/loading_spinner.gd" id="2_ex42u"]
+
+[node name="LoadingDialog" type="VBoxContainer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 500.0
+offset_bottom = 500.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(500, 515)
+theme = ExtResource("1_wuh5k")
+alignment = 1
+
+[node name="Waiting" type="Label" parent="."]
+layout_mode = 2
+text = "Waiting for other player"
+horizontal_alignment = 1
+
+[node name="LoadingCircle" type="Sprite2D" parent="."]
+position = Vector2(500, 575)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_n8ggv")
+script = ExtResource("2_ex42u")

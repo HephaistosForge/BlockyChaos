@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dnnr8htvksq46"]
 
-[ext_resource type="Script" path="res://world/intro_screen.gd" id="1_ln4yc"]
+[ext_resource type="Script" path="res://ui/intro_screen/intro_screen.gd" id="1_kulnv"]
 [ext_resource type="Texture2D" uid="uid://eba7rvgqxc6h" path="res://ui/intro_screen/HephaistosForge1.png" id="2_2qnbv"]
 
 [sub_resource type="Animation" id="Animation_jkl6r"]
@@ -113,7 +113,7 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-script = ExtResource("1_ln4yc")
+script = ExtResource("1_kulnv")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 custom_minimum_size = Vector2(1600, 1600)
