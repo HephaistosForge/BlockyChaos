@@ -1,0 +1,93 @@
+[gd_scene load_steps=5 format=3 uid="uid://y6f6jv4wruql"]
+
+[ext_resource type="Script" path="res://world/Connection Dialog.gd" id="1_yfax8"]
+[ext_resource type="Theme" uid="uid://dp58tqgvn7o0e" path="res://world/default_theme.tres" id="2_udbkd"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_2opdg"]
+action = &"accept"
+
+[sub_resource type="Shortcut" id="Shortcut_gekxu"]
+events = [SubResource("InputEventAction_2opdg")]
+
+[node name="ConnectionDialog" type="PanelContainer" node_paths=PackedStringArray("address_node", "port_node")]
+offset_left = 20.0
+offset_top = 16.0
+offset_right = 400.0
+offset_bottom = 329.0
+theme = ExtResource("2_udbkd")
+script = ExtResource("1_yfax8")
+address_node = NodePath("MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Ip")
+port_node = NodePath("MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Port")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 20
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="BackButton" type="Button" parent="MarginContainer/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 90
+text = "<"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 60
+alignment = 1
+
+[node name="HBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -4
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Host IP address:"
+
+[node name="Ip" type="TextEdit" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(150, 40)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "127.0.0.1"
+placeholder_text = "IP Address"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = -4
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Port:"
+
+[node name="Port" type="TextEdit" parent="MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(80, 40)
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "12077"
+placeholder_text = "Port"
+
+[node name="Connect" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_udbkd")
+shortcut = SubResource("Shortcut_gekxu")
+text = "Connect
+"
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/MarginContainer/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Connect" to="." method="_on_connect_pressed"]

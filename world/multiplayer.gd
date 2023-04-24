@@ -51,9 +51,9 @@ func on_host() -> void:
 	multiplayer_peer.peer_disconnected.connect(_on_peer_disconnected)
 
 
-func on_join() -> void:
-	var address = $"../ConnectionDialog/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Ip".text
-	var port = int($"../ConnectionDialog/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Port".text)
+func on_join(address, port) -> void:
+	# var address = $"../ConnectionDialog/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Ip".text
+	# var port = int($"../ConnectionDialog/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Port".text)
 	change_from_menu_to_game()
 	multiplayer_peer.create_client(address, port)
 	multiplayer.multiplayer_peer = multiplayer_peer

@@ -14,7 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://dkphkpim1ixa5" path="res://world/music/background.mp3" id="6_ftcl4"]
 [ext_resource type="Script" path="res://world/restart.gd" id="7_v7vsj"]
 [ext_resource type="Theme" uid="uid://dp58tqgvn7o0e" path="res://world/default_theme.tres" id="8_djg35"]
-[ext_resource type="Script" path="res://world/Connection Dialog.gd" id="13_3bi47"]
+[ext_resource type="PackedScene" uid="uid://y6f6jv4wruql" path="res://ui/connection_dialog/connection_dialog.tscn" id="13_yffd8"]
 [ext_resource type="PackedScene" uid="uid://s213jx5eke4u" path="res://ui/how_to_play_dialog/how_to_play_dialog.tscn" id="16_panuv"]
 [ext_resource type="PackedScene" uid="uid://hj667vw3w172" path="res://ui/settings/settings.tscn" id="17_rpdj3"]
 [ext_resource type="PackedScene" uid="uid://1x06g2vmufkn" path="res://ui/difficulty_dialog/difficulty_dialog.tscn" id="18_x41xh"]
@@ -351,79 +351,8 @@ layout_mode = 2
 theme = ExtResource("8_djg35")
 text = "Exit"
 
-[node name="ConnectionDialog" type="PanelContainer" parent="."]
-modulate = Color(1, 1, 1, 0)
-offset_left = 20.0
-offset_top = 16.0
-offset_right = 400.0
-offset_bottom = 329.0
-script = ExtResource("13_3bi47")
-
-[node name="MarginContainer" type="MarginContainer" parent="ConnectionDialog"]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_right = 20
-
-[node name="HBoxContainer" type="HBoxContainer" parent="ConnectionDialog/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 40
-
-[node name="MarginContainer" type="MarginContainer" parent="ConnectionDialog/MarginContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_bottom = 20
-
-[node name="BackButton" type="Button" parent="ConnectionDialog/MarginContainer/HBoxContainer/MarginContainer"]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-text = "<"
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ConnectionDialog/MarginContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/separation = 60
-alignment = 1
-
-[node name="HBoxContainer" type="VBoxContainer" parent="ConnectionDialog/MarginContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="ConnectionDialog/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = -4
-
-[node name="Label" type="Label" parent="ConnectionDialog/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "IP-Adress:"
-
-[node name="Ip" type="TextEdit" parent="ConnectionDialog/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
-custom_minimum_size = Vector2(150, 40)
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "127.0.0.1"
-placeholder_text = "IP-Adresse"
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="ConnectionDialog/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = -4
-
-[node name="Label" type="Label" parent="ConnectionDialog/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-text = "Port:"
-
-[node name="Port" type="TextEdit" parent="ConnectionDialog/MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
-custom_minimum_size = Vector2(80, 40)
-layout_mode = 2
-theme_override_font_sizes/font_size = 20
-text = "12077"
-placeholder_text = "Port"
-
-[node name="Join" type="Button" parent="ConnectionDialog/MarginContainer/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-theme = ExtResource("8_djg35")
-text = "Connect
-"
+[node name="ConnectionDialog" parent="." instance=ExtResource("13_yffd8")]
+z_index = 35
 
 [node name="HowToPlayDialog" parent="." instance=ExtResource("16_panuv")]
 visible = false
@@ -474,6 +403,5 @@ bus = &"Music"
 [connection signal="pressed" from="Menu/Join" to="ConnectionDialog" method="_on_join_pressed"]
 [connection signal="pressed" from="Menu/Settings" to="SettingsDialog" method="_on_settings_pressed"]
 [connection signal="button_up" from="Menu/Exit" to="Multiplayer" method="_on_exit"]
-[connection signal="pressed" from="ConnectionDialog/MarginContainer/HBoxContainer/MarginContainer/BackButton" to="ConnectionDialog" method="_on_back_button_pressed"]
-[connection signal="button_up" from="ConnectionDialog/MarginContainer/HBoxContainer/VBoxContainer/Join" to="Multiplayer" method="on_join"]
+[connection signal="connect_to" from="ConnectionDialog" to="Multiplayer" method="on_join"]
 [connection signal="difficulty_clicked" from="DifficultyDialog" to="." method="_set_difficulty"]
