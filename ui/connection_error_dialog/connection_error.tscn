@@ -1,8 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://db6lwocof1fbi"]
+[gd_scene load_steps=4 format=3 uid="uid://gaolklyje8mv"]
 
-[ext_resource type="Theme" uid="uid://dp58tqgvn7o0e" path="res://world/default_theme.tres" id="1_fvx1w"]
-[ext_resource type="Script" path="res://ui/connection_error.gd" id="2_0lgit"]
-[ext_resource type="Texture2D" uid="uid://cg4vntieyrsut" path="res://entities/player/sprites/MrRed.png" id="2_3lghl"]
+[ext_resource type="Theme" uid="uid://dp58tqgvn7o0e" path="res://ui/theme.tres" id="1_jorjc"]
+[ext_resource type="Script" path="res://ui/connection_error_dialog/connection_error.gd" id="2_ytejg"]
+[ext_resource type="Texture2D" uid="uid://cg4vntieyrsut" path="res://entities/player/sprites/MrRed.png" id="3_rek1n"]
 
 [node name="ConnectionError" type="PanelContainer"]
 z_index = 4096
@@ -13,8 +13,8 @@ offset_bottom = 99.0
 pivot_offset = Vector2(186, 99)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme = ExtResource("1_fvx1w")
-script = ExtResource("2_0lgit")
+theme = ExtResource("1_jorjc")
+script = ExtResource("2_ytejg")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -53,7 +53,7 @@ custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("2_3lghl")
+texture = ExtResource("3_rek1n")
 expand_mode = 1
 
 [node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer/HBoxContainer"]

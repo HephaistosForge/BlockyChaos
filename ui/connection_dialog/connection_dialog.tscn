@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://y6f6jv4wruql"]
+[gd_scene load_steps=5 format=3 uid="uid://c17ktta1s2to7"]
 
-[ext_resource type="Script" path="res://world/Connection Dialog.gd" id="1_yfax8"]
-[ext_resource type="Theme" uid="uid://dp58tqgvn7o0e" path="res://world/default_theme.tres" id="2_udbkd"]
+[ext_resource type="Script" path="res://ui/connection_dialog/connection_dialog.gd" id="2_1qgjx"]
+[ext_resource type="Theme" uid="uid://dp58tqgvn7o0e" path="res://ui/theme.tres" id="2_udbkd"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_2opdg"]
 action = &"accept"
@@ -15,7 +15,7 @@ offset_top = 16.0
 offset_right = 400.0
 offset_bottom = 329.0
 theme = ExtResource("2_udbkd")
-script = ExtResource("1_yfax8")
+script = ExtResource("2_1qgjx")
 address_node = NodePath("MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer/Ip")
 port_node = NodePath("MarginContainer/HBoxContainer/VBoxContainer/HBoxContainer/VBoxContainer2/Port")
 

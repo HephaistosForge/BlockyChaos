@@ -1,12 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://2qhapug04qh1"]
+[gd_scene load_steps=11 format=3 uid="uid://dvdlnqih040j5"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_3yqfr"]
 [ext_resource type="Texture2D" uid="uid://ciqvshb2x1uxb" path="res://entities/player/sprites/Body.png" id="2_rh600"]
 [ext_resource type="Texture2D" uid="uid://vg24kd6ys30m" path="res://entities/player/sprites/Mouth.png" id="3_0otid"]
 [ext_resource type="Texture2D" uid="uid://cvdjv7p31nht8" path="res://entities/player/sprites/EyeWhite.png" id="4_oidmn"]
 [ext_resource type="Texture2D" uid="uid://bf1ov78ypuakn" path="res://entities/player/sprites/EyeBlack.png" id="5_2gsgv"]
-[ext_resource type="AudioStream" uid="uid://bcjarlbt51d16" path="res://entities/player/audio/wrong.wav" id="6_yek66"]
-[ext_resource type="AudioStream" uid="uid://bcyu606so3hx7" path="res://entities/player/audio/move.wav" id="7_aqrrm"]
+[ext_resource type="AudioStream" uid="uid://bcjarlbt51d16" path="res://audio/sfx/wrong.wav" id="6_mbjvk"]
+[ext_resource type="AudioStream" uid="uid://bcyu606so3hx7" path="res://audio/sfx/move.wav" id="7_rxnn2"]
 [ext_resource type="PackedScene" uid="uid://bpwaytudrfvo2" path="res://particle_effects/death/death.tscn" id="8_q2rcd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mqqhx"]
@@ -71,11 +71,11 @@ texture = ExtResource("4_oidmn")
 texture = ExtResource("5_2gsgv")
 
 [node name="AudioWrong" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_yek66")
+stream = ExtResource("6_mbjvk")
 bus = &"Sounds"
 
 [node name="AudioMove" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_aqrrm")
+stream = ExtResource("7_rxnn2")
 max_polyphony = 3
 bus = &"Sounds"
 

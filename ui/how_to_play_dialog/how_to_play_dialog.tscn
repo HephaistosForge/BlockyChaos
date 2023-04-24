@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://s213jx5eke4u"]
+[gd_scene load_steps=6 format=3 uid="uid://cwbuai7c7sue7"]
 
 [ext_resource type="Script" path="res://ui/how_to_play_dialog/how_to_play_dialog.gd" id="1_7fcdk"]
-[ext_resource type="Theme" uid="uid://dp58tqgvn7o0e" path="res://world/default_theme.tres" id="1_eadan"]
+[ext_resource type="Theme" uid="uid://dp58tqgvn7o0e" path="res://ui/theme.tres" id="1_eadan"]
 [ext_resource type="Texture2D" uid="uid://cg4vntieyrsut" path="res://entities/player/sprites/MrRed.png" id="1_vw8cv"]
 [ext_resource type="Texture2D" uid="uid://cr18jbgjf2df7" path="res://entities/trap/Sawblade.png" id="2_1o0gt"]
 [ext_resource type="Texture2D" uid="uid://fgjgqacja3s6" path="res://entities/goal/goal.png" id="3_qcv8q"]

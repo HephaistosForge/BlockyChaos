@@ -45,8 +45,8 @@ func set_difficulty(_difficulty, index):
 	bullet_label.text = str(_difficulty.bullets)
 	$Number.text = str(index)
 	
-	var trap_scale = sqrt(_difficulty.traps / 10)
-	var bullet_scale = sqrt(_difficulty.bullets / 2)
+	#var trap_scale = sqrt(_difficulty.traps / 10)
+	#var bullet_scale = sqrt(_difficulty.bullets / 2)
 	
 	#trap_label.set("theme_override_font_sizes/font_size", 40 * trap_scale)
 	#bullet_label.set("theme_override_font_sizes/font_size", 40 * bullet_scale)

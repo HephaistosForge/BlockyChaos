@@ -1,14 +1,51 @@
-[gd_scene load_steps=3 format=3 uid="uid://bpwaytudrfvo2"]
+[gd_scene load_steps=6 format=3 uid="uid://bpwaytudrfvo2"]
 
 [ext_resource type="Material" uid="uid://bdju50f0sd4ce" path="res://particle_effects/death/death.tres" id="1_aagra"]
-[ext_resource type="Texture2D" uid="uid://bhsj2hf3rerth" path="res://particle_effects/spark_particle.png" id="2_ujn76"]
+[ext_resource type="Texture2D" uid="uid://ciqvshb2x1uxb" path="res://entities/player/sprites/Body.png" id="2_bx034"]
+[ext_resource type="Texture2D" uid="uid://vg24kd6ys30m" path="res://entities/player/sprites/Mouth.png" id="3_a81ln"]
+[ext_resource type="Texture2D" uid="uid://cvdjv7p31nht8" path="res://entities/player/sprites/EyeWhite.png" id="4_kymm5"]
+[ext_resource type="Texture2D" uid="uid://bf1ov78ypuakn" path="res://entities/player/sprites/EyeBlack.png" id="5_lhx1w"]
 
-[node name="death" type="GPUParticles2D"]
+[node name="DeathParticles" type="GPUParticles2D"]
 emitting = false
 amount = 40
 process_material = ExtResource("1_aagra")
-texture = ExtResource("2_ujn76")
-lifetime = 6.0
+texture = ExtResource("2_bx034")
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
+
+[node name="BodySprite" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.439216)
+self_modulate = Color(1, 0, 0, 1)
+scale = Vector2(0.063, 0.063)
+texture = ExtResource("2_bx034")
+
+[node name="MouthSprite" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.439216)
+scale = Vector2(0.065, 0.065)
+texture = ExtResource("3_a81ln")
+
+[node name="LeftEye" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.439216)
+position = Vector2(-19, -12)
+scale = Vector2(0.065, 0.065)
+texture = ExtResource("4_kymm5")
+
+[node name="LeftEyePupil" type="Sprite2D" parent="LeftEye"]
+visible = false
+texture = ExtResource("5_lhx1w")
+
+[node name="RightEye" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.439216)
+position = Vector2(19, -16)
+scale = Vector2(0.063, 0.063)
+texture = ExtResource("4_kymm5")
+
+[node name="RightEyePupil" type="Sprite2D" parent="RightEye"]
+visible = false
+texture = ExtResource("5_lhx1w")

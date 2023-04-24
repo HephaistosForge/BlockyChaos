@@ -5,7 +5,7 @@ extends Node
 var multiplayer_peer = ENetMultiplayerPeer.new()
 
 
-const CONNECTION_ERROR_DIALOG_PREFAB = preload("res://ui/connection_error.tscn")
+const CONNECTION_ERROR_DIALOG_PREFAB = preload("res://ui/connection_error_dialog/connection_error.tscn")
 const PORT = 12077
 const ADDRESS = "127.0.0.1"
 const MAX_PLAYERS = 2

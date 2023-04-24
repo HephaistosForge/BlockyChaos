@@ -17,6 +17,10 @@ boot_splash/bg_color=Color(0.101961, 0.113725, 0.133333, 1)
 boot_splash/image="res://ui/intro_screen/HephaistosForge1.png"
 config/icon="res://icon.png"
 
+[audio]
+
+buses/default_bus_layout="res://audio/default_bus_layout.tres"
+
 [autoload]
 
 Globals="*res://globals/globals.gd"

@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dheyw2mpfn25m"]
+[gd_scene load_steps=5 format=3 uid="uid://d4gk4v4wk6ld"]
 
-[ext_resource type="Theme" uid="uid://dp58tqgvn7o0e" path="res://world/default_theme.tres" id="1_880s1"]
+[ext_resource type="Theme" uid="uid://dp58tqgvn7o0e" path="res://ui/theme.tres" id="1_2b64v"]
 [ext_resource type="Script" path="res://ui/difficulty_dialog/difficulty_button.gd" id="1_fd3nu"]
 [ext_resource type="Texture2D" uid="uid://cr18jbgjf2df7" path="res://entities/trap/Sawblade.png" id="1_sfcea"]
 [ext_resource type="Texture2D" uid="uid://byack20pobxh3" path="res://entities/bullet/bullet.png" id="2_knjej"]
@@ -11,7 +11,7 @@ offset_right = 180.0
 offset_bottom = 173.0
 pivot_offset = Vector2(96, 89)
 mouse_default_cursor_shape = 2
-theme = ExtResource("1_880s1")
+theme = ExtResource("1_2b64v")
 script = ExtResource("1_fd3nu")
 trap_label = NodePath("Description/TrapContainer/MarginContainer/Label")
 trap_image = NodePath("Description/TrapContainer/Image")

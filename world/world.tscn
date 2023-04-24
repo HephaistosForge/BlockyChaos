@@ -1,23 +1,23 @@
-[gd_scene load_steps=26 format=3 uid="uid://c48wvhcpnqhb1"]
+[gd_scene load_steps=26 format=3 uid="uid://de3s6l2peruyr"]
 
 [ext_resource type="Script" path="res://world/world.gd" id="1_nu8f6"]
 [ext_resource type="Script" path="res://world/floor.gd" id="1_qsj2w"]
 [ext_resource type="Script" path="res://world/multiplayer.gd" id="2_c2arv"]
-[ext_resource type="Script" path="res://world/menu_floor.gd" id="2_ieowh"]
-[ext_resource type="Texture2D" uid="uid://ciyu1yyim3ms4" path="res://world/Loading.png" id="3_bj73h"]
+[ext_resource type="Script" path="res://ui/menu/menu_floor.gd" id="2_xqiec"]
 [ext_resource type="Script" path="res://world/loading_spinner.gd" id="4_6jm1b"]
+[ext_resource type="Texture2D" uid="uid://bxhkhlyrnedka" path="res://ui/menu/blocky.png" id="4_b0rf0"]
 [ext_resource type="PackedScene" uid="uid://bmd3e8ptyq8vn" path="res://entities/menu_player/menu_player.tscn" id="4_l7k3v"]
-[ext_resource type="Texture2D" uid="uid://bxhkhlyrnedka" path="res://world/blocky.png" id="4_ya7jl"]
-[ext_resource type="Texture2D" uid="uid://2c77w257aian" path="res://world/chaos.png" id="5_eek5n"]
 [ext_resource type="Script" path="res://world/big_floating_message_container.gd" id="5_f3boa"]
 [ext_resource type="Script" path="res://world/gameover.gd" id="5_kpq7d"]
-[ext_resource type="AudioStream" uid="uid://dkphkpim1ixa5" path="res://world/music/background.mp3" id="6_ftcl4"]
+[ext_resource type="Texture2D" uid="uid://2c77w257aian" path="res://ui/menu/chaos.png" id="5_wpdls"]
+[ext_resource type="Texture2D" uid="uid://ciyu1yyim3ms4" path="res://world/loading_icon.png" id="7_6eblg"]
 [ext_resource type="Script" path="res://world/restart.gd" id="7_v7vsj"]
-[ext_resource type="Theme" uid="uid://dp58tqgvn7o0e" path="res://world/default_theme.tres" id="8_djg35"]
-[ext_resource type="PackedScene" uid="uid://y6f6jv4wruql" path="res://ui/connection_dialog/connection_dialog.tscn" id="13_yffd8"]
-[ext_resource type="PackedScene" uid="uid://s213jx5eke4u" path="res://ui/how_to_play_dialog/how_to_play_dialog.tscn" id="16_panuv"]
-[ext_resource type="PackedScene" uid="uid://hj667vw3w172" path="res://ui/settings/settings.tscn" id="17_rpdj3"]
-[ext_resource type="PackedScene" uid="uid://1x06g2vmufkn" path="res://ui/difficulty_dialog/difficulty_dialog.tscn" id="18_x41xh"]
+[ext_resource type="Theme" uid="uid://dp58tqgvn7o0e" path="res://ui/theme.tres" id="9_54h2v"]
+[ext_resource type="PackedScene" uid="uid://c17ktta1s2to7" path="res://ui/connection_dialog/connection_dialog.tscn" id="13_yffd8"]
+[ext_resource type="PackedScene" uid="uid://cwbuai7c7sue7" path="res://ui/how_to_play_dialog/how_to_play_dialog.tscn" id="16_panuv"]
+[ext_resource type="PackedScene" uid="uid://83o7d5xjb155" path="res://ui/settings_dialog/settings.tscn" id="17_rpdj3"]
+[ext_resource type="AudioStream" uid="uid://dkphkpim1ixa5" path="res://audio/music/background.mp3" id="18_jjlqk"]
+[ext_resource type="PackedScene" uid="uid://cw8tswel1ykl7" path="res://ui/difficulty_dialog/difficulty_dialog.tscn" id="18_x41xh"]
 
 [sub_resource type="Animation" id="Animation_lk0en"]
 length = 0.001
@@ -214,7 +214,7 @@ script = ExtResource("1_nu8f6")
 
 [node name="MenuFloor" type="Sprite2D" parent="MenuBackground"]
 centered = false
-script = ExtResource("2_ieowh")
+script = ExtResource("2_xqiec")
 
 [node name="MenuPlayerRed" parent="MenuBackground" instance=ExtResource("4_l7k3v")]
 position = Vector2(-400, 1)
@@ -240,12 +240,12 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_j5pu1")
 [node name="Blocky" type="Sprite2D" parent="MenuBackground"]
 position = Vector2(-104, -364)
 scale = Vector2(0.275, 0.275)
-texture = ExtResource("4_ya7jl")
+texture = ExtResource("4_b0rf0")
 
 [node name="Chaos" type="Sprite2D" parent="MenuBackground"]
 position = Vector2(141, -236)
 scale = Vector2(0.275, 0.275)
-texture = ExtResource("5_eek5n")
+texture = ExtResource("5_wpdls")
 
 [node name="Floor" type="Sprite2D" parent="."]
 visible = false
@@ -276,7 +276,7 @@ horizontal_alignment = 1
 [node name="Sprite2D" type="Sprite2D" parent="Waiting"]
 position = Vector2(500, 575)
 scale = Vector2(0.1, 0.1)
-texture = ExtResource("3_bj73h")
+texture = ExtResource("7_6eblg")
 script = ExtResource("4_6jm1b")
 
 [node name="BigFloatingMessageContainer" type="VBoxContainer" parent="."]
@@ -295,7 +295,7 @@ offset_bottom = 57.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(284.5, 101)
-theme = ExtResource("8_djg35")
+theme = ExtResource("9_54h2v")
 theme_override_constants/separation = 40
 alignment = 1
 script = ExtResource("5_f3boa")
@@ -326,7 +326,7 @@ offset_right = -5.0
 offset_bottom = 287.0
 size_flags_horizontal = 3
 size_flags_vertical = 4
-theme = ExtResource("8_djg35")
+theme = ExtResource("9_54h2v")
 theme_override_constants/separation = 40
 
 [node name="HowToPlay" type="Button" parent="Menu"]
@@ -335,7 +335,7 @@ text = "How To Play"
 
 [node name="Host" type="Button" parent="Menu"]
 layout_mode = 2
-theme = ExtResource("8_djg35")
+theme = ExtResource("9_54h2v")
 text = "Host "
 
 [node name="Join" type="Button" parent="Menu"]
@@ -348,7 +348,7 @@ text = "Settings"
 
 [node name="Exit" type="Button" parent="Menu"]
 layout_mode = 2
-theme = ExtResource("8_djg35")
+theme = ExtResource("9_54h2v")
 text = "Exit"
 
 [node name="ConnectionDialog" parent="." instance=ExtResource("13_yffd8")]
@@ -392,7 +392,7 @@ spawn_path = NodePath("..")
 replication_config = SubResource("SceneReplicationConfig_oorh6")
 
 [node name="MusicPlayer" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("6_ftcl4")
+stream = ExtResource("18_jjlqk")
 volume_db = -10.0
 autoplay = true
 bus = &"Music"
