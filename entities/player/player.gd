@@ -40,12 +40,13 @@ func die():
 	tween.parallel().tween_property(self, "scale", Vector2.ONE * .2, 1) \
 		.set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_BACK)
 	
+	$Death.emitting = true
+	
 	# Bug Fix: Clicking "Ready" Button too early before tween animation is
 	# done causes Player to be resetted "inside the animation"
 	# Therefore, await
 	await get_tree().create_timer(1.0).timeout
 	
-	$death.emitting = true
 	rpc("display_big_floating_message", Globals.GAME_OVER_TEXT)
 
 
@@ -121,6 +122,7 @@ func check_if_won():
 @rpc("any_peer")
 func init_as_player(color, tile_coord, player_type: String):
 	$Body/BodySprite.self_modulate = color
+	$Death.modulate = color
 	
 	self.type = player_type
 	#if is_multiplayer_authority():
@@ -133,7 +135,7 @@ func init_as_player(color, tile_coord, player_type: String):
 
 func restart() -> void:
 	# "Manual" restart, session is kept
-	$death.emitting = false
+	$Death.emitting = false
 	
 	tile = Vector2.ZERO if type == "red" else Vector2.ONE * get_parent().get_parent().map_size - Vector2.ONE
 	

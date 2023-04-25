@@ -7,6 +7,13 @@ var big_floating_messager_container: VBoxContainer
 
 var did_show_intro = false
 
+var config = ConfigFile.new()
+
+func _ready():
+	var err = config.load("user://persistent.cfg")
+	if err != OK:
+		pass
+
 
 func display_big_floating_message(text: String) -> void:
 	big_floating_messager_container.display_message(text)
@@ -26,3 +33,14 @@ func look_with_pupil_at_mouse(eye):
 	if direction.length() > 70:
 		direction = direction.normalized() * 70
 	pupil.global_position = eye.global_position + direction * pupil.global_scale
+
+
+func save_difficulty_completed(difficulty):
+	assert(difficulty is String)
+	config.set_value("difficulty_completed", difficulty, true)
+	config.save("user://persistent.cfg")
+
+func load_difficulty_completed(difficulty):
+	assert(difficulty is String)
+	return config.get_value("difficulty_completed", difficulty, false)
+	

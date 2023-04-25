@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://d4gk4v4wk6ld"]
+[gd_scene load_steps=7 format=3 uid="uid://d4gk4v4wk6ld"]
 
 [ext_resource type="Theme" uid="uid://dp58tqgvn7o0e" path="res://ui/theme.tres" id="1_2b64v"]
 [ext_resource type="Script" path="res://ui/difficulty_dialog/difficulty_button.gd" id="1_fd3nu"]
 [ext_resource type="Texture2D" uid="uid://cr18jbgjf2df7" path="res://entities/trap/Sawblade.png" id="1_sfcea"]
 [ext_resource type="Texture2D" uid="uid://byack20pobxh3" path="res://entities/bullet/bullet.png" id="2_knjej"]
+[ext_resource type="Script" path="res://ui/difficulty_dialog/if_recommended.gd" id="3_3o6ek"]
+[ext_resource type="Script" path="res://ui/difficulty_dialog/if_checkmark.gd" id="4_cbdwt"]
 
 [node name="DifficultyButton" type="PanelContainer" node_paths=PackedStringArray("trap_label", "trap_image", "bullet_label", "bullet_image")]
 custom_minimum_size = Vector2(180, 0)
@@ -18,12 +20,40 @@ trap_image = NodePath("Description/TrapContainer/Image")
 bullet_label = NodePath("Description/BulletContainer/MarginContainer2/Label")
 bullet_image = NodePath("Description/BulletContainer/Image")
 
+[node name="Node" type="Node2D" parent="."]
+
+[node name="Recommended" type="Label" parent="Node"]
+visible = false
+offset_left = 19.0
+offset_top = 1.0
+offset_right = 218.0
+offset_bottom = 46.0
+rotation = 0.334999
+pivot_offset = Vector2(99.564, 22.2078)
+size_flags_horizontal = 4
+theme = ExtResource("1_2b64v")
+theme_override_font_sizes/font_size = 25
+text = "Recommended"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("3_3o6ek")
+
 [node name="Number" type="Label" parent="."]
 layout_mode = 2
 theme_override_font_sizes/font_size = 64
 text = "1"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Checkmark" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.701961, 0, 0.831373)
+theme_override_font_sizes/font_size = 101
+text = "✔"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+script = ExtResource("4_cbdwt")
 
 [node name="Description" type="VBoxContainer" parent="."]
 modulate = Color(1, 1, 1, 0)

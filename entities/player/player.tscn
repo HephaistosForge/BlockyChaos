@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bf1ov78ypuakn" path="res://entities/player/sprites/EyeBlack.png" id="5_2gsgv"]
 [ext_resource type="AudioStream" uid="uid://bcjarlbt51d16" path="res://audio/sfx/wrong.wav" id="6_mbjvk"]
 [ext_resource type="AudioStream" uid="uid://bcyu606so3hx7" path="res://audio/sfx/move.wav" id="7_rxnn2"]
-[ext_resource type="PackedScene" uid="uid://bpwaytudrfvo2" path="res://particle_effects/death/death.tscn" id="8_q2rcd"]
+[ext_resource type="PackedScene" uid="uid://bpwaytudrfvo2" path="res://entities/player/death_particles/death.tscn" id="8_q2rcd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mqqhx"]
 size = Vector2(85, 82)
@@ -31,7 +31,7 @@ properties/4/sync = true
 properties/5/path = NodePath(".:scale")
 properties/5/spawn = true
 properties/5/sync = true
-properties/6/path = NodePath("death:emitting")
+properties/6/path = NodePath("Death:emitting")
 properties/6/spawn = true
 properties/6/sync = true
 
@@ -82,4 +82,4 @@ bus = &"Sounds"
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_7i3tb")
 
-[node name="death" parent="." instance=ExtResource("8_q2rcd")]
+[node name="Death" parent="." instance=ExtResource("8_q2rcd")]
